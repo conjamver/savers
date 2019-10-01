@@ -1,0 +1,219 @@
+//Colors
+$l_white: #fefefe;
+$d_white: #f5f5f5;
+$primary: #badc58;
+$d-primary: #6ab04c;
+
+
+$h_font: 'Noticia Text', serif;
+
+
+html,body{
+    height:100%;
+}
+
+body{
+    padding-top: 54px;
+}
+
+
+#main{
+    min-height:100%;
+    
+    background-color:$d_white; 
+}
+
+
+
+//WELCOME PAGE STYLING
+#home-banner{
+    background-size:100% 100vh;
+    min-height: 60vh;
+    background-image:  linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 59%, rgba(0, 0, 0, 0.7) 100%), url(../img/home-banner.jpg);
+    background-size:cover;
+    background-repeat:no-repeat;
+     background-attachment: fixed;
+    color: $l_white;
+    
+    display:flex;
+    align-items: center;
+    
+    
+    h1{
+        font-family: $h-font;
+        color:$primary;
+        //bottom:100px;
+    }
+    
+    h3{
+        color:$d-primary;
+    }
+    
+    img{
+        max-height: 200px;
+    }
+    input{
+        border-radius: 4px;
+        font-size:24px;
+        width:100%
+    }
+    
+}
+
+
+
+.home-body{
+    padding:24px 0;
+    //background-color:$d_white;
+    
+    h2{
+        color:$primary; 
+    }
+  
+}
+
+#home-benefits{
+    background-color:$l_white;
+    i{
+        padding:10px 0;
+        font-size:64px;
+        color:$d_primary;
+    }
+}
+
+
+.input-icon{
+    position:relative;
+    
+    span{
+        position:absolute;
+        color:black;
+        display: block;
+        transform: translate(0, -50%);
+        top: 50%;
+        width:36px;
+        font-weight:bold;
+    }
+    input{
+        padding-left:30px;
+    }
+}
+
+//Purple background that stretches across screen
+#blog-featuredBody{
+    padding:16px 0;
+    background-color:$d_primary;
+    background-image:linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0));
+    
+      h2{
+        color:$l_white;
+          text-align: center;
+          padding-bottom: 10px;
+    }
+    h2::after{
+        content: '';
+        background-color:$l_white;
+        display:block;
+        text-align: center;
+        width:100%;
+        height:2px;   
+    }
+}
+
+
+//START OF SAVER ITEMS
+
+.saver-outerBody{
+    margin-bottom:32px;
+}
+
+
+.blog-featured{
+    
+    background-color:white;
+    box-shadow: 0 4px 4px rgba(0,0,0,0.1);
+    min-height:100%;
+    transition:0.25;
+   
+   // border-bottom-left-radius: 8px;
+   // border-bottom-right-radius: 8px;
+    border-radius:8px;
+    filter:brightness(100%);
+    
+    
+    .blog-featuredContent{
+       // display:flex;
+       // padding:12px;
+        
+        //So we can put rank icon in
+        h3, h5{
+            display:inline;
+        }
+        
+        
+        
+    }
+    
+    .badge{
+        color:white;
+        width:100%;
+    }
+}
+
+
+
+//END OF SAVER ITEMS
+
+
+////ABOUT SECTION
+
+#about{
+    padding:16px 0;
+    min-height: 100%;
+}
+
+.about-container{
+    border: 2px solid $d-primary;
+    border-radius:8px;
+    padding:16px;
+    
+  
+    
+}
+
+////END ABOUT SECTION
+
+nav{
+    a{
+        font-weight: bold;
+    }
+    img{
+        max-height: 25px;
+    }
+}
+
+
+
+#nav-logo{
+    font-family: $h-font;
+    color:$primary;
+    //font-size:32px;
+}
+
+
+
+
+//FOOTER STYLING
+footer{
+    h5{
+        font-family: $h_font;
+        color:$primary;
+        display:inline-block;
+    }
+    img{
+        max-height:40px;
+    }
+    color:$l_white;
+    background:#343a40;
+    padding:10px 0px;
+}
