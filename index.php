@@ -3,20 +3,62 @@
 <html lang="en">
 
 <head>
-   <?php include 'includes/header.php'; ?>
+    
+  
+    <?php include 'includes/header.php'; ?>
     <?php include 'includes/funcs.php'; ?>
     
     <?php
     
-     //Declare
-     $saveAmount = "";
+    //Declare variables
+    $saveAmount = "";
+    $alertErr = "";
+    $isError = false;
+    
+    
     
     //Start of form handling
     if(isset($_GET['submitAmount'])) {
-       
+        
         $saveAmount = cleanData($_GET["saveAmount"]);
+        
+        //Validate data
+        if (!is_numeric($saveAmount)){
+            //Echo Error Message
+            $alertErr = 'Please make sure savings amount is a valid number.';
+            $isError = true;
+        }else{
+            $isError = false;
+        }
     }
     
+    
+           //Create SQL string for getting saving account data
+            $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, s_rank.rank, s_rank.rank_color FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1 ORDER BY s_rank.rank_id ASC";
+                    
+            // Run Query
+            $result = mysqli_query($conn, $sql);
+    
+    
+    
+            //START OF PAGINATION
+            $results_per_page = 9;
+            $number_of_results = mysqli_num_rows($result);
+
+            //Calculate the number of pages by dividing total by results per page
+            $number_of_pages = ceil($number_of_results/$results_per_page);
+
+            //Dermine which page number visitor is on. Default is page 1
+
+            if(!isset($_GET['page'])){
+                $page = 1;
+            }else{
+                $page = $_GET['page'];
+            }
+
+            //SQL limit - Find the first result Example (Page 1 will be 0, page 2 will be 9)
+            $this_page_first_result = ($page - 1) * $results_per_page;
+
     ?>
     
 </head>
@@ -25,7 +67,38 @@
 
 <body>
     <?php include 'includes/nav.php'; ?>
-  
+    
+    <!--Alert Section --> 
+    <?php
+    if ($isError == true) { 
+    //Display error when value is true
+    ?>
+            <div id="alertContainer" class="alert alertErr">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-11 text-left">
+                              <strong><i class="fas fa-exclamation-circle"></i> Error: </strong><?php echo $alertErr; ?>
+                        </div>
+                        
+                        <div class="col-1 text-right">
+                             <!--Exit alert button --> 
+                            <span class="alertExit">
+                                <i class="far fa-times-circle"></i>
+                            </span>
+                        </div>
+                        
+                    </div>
+                     
+                   
+    
+                </div>
+            </div> 
+   <?php }
+    ?>
+
+     <!--End Alert Section -->
+    
+    
     <div id="main">
          <!--Welcome Banner --> 
         <section id="home-banner">
@@ -34,26 +107,24 @@
                     <div class="col-md-2 text-center">
                     </div>
                     <div class="col-md-8 text-center">
+                        <!--Start Search Bar -->
+                        <h1>Current Savings Amount</h1>
 
-                        <!--Start Search Bar --> 
-                        <form method="GET" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
-                            
-                            <h1>Current Savings Amount</h1>
-                            
-                            <div class="input-icon">
-                                <input type="text" class="" name="saveAmount" maxlength="16" value="<?php echo $saveAmount; ?>" placeholder="Enter savings amount here">
-                                <span>$</span>
-                            </div>
-                           
-                            <input type="submit" name="submitAmount" class="btn btn-success">
-                            <!--End Search Bar --> 
+                        <form method="GET" class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+
+
+                            <input type="text" id="saveAmount" class="form-control" style="width:80%;" name="saveAmount" maxlength="16" value="<?php echo $saveAmount; ?>" placeholder="Enter savings amount here">
+
+
+                            <input type="submit" name="submitAmount" style="width:20%;" class="btn btn-success">
+                            <!--End Search Bar -->
                         </form>
-                        
+
                     </div>
-                  
-                    
+
+
                 </div>
-               
+
             </div>
         </section>
         
@@ -62,13 +133,54 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h2>Top Savings Accounts</h2>
+                        <div class = "row">
+                              <!--START OF PAGINATION --> 
+                            <div class="col-md-4">
+                                <strong><?php echo $this_page_first_result + 1 . "-" . $results_per_page * $page; ?> of <?php echo $number_of_results; ?> Results</strong>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                
+                                <?php
+                            
+                                    
+                                    //re run query with limit
+                                    $sql2 = $sql . " LIMIT " . $this_page_first_result . "," . $results_per_page; 
+                                    $result = mysqli_query($conn,$sql2);
+
+                                     ?>
+                                <ul class="pagination justify-content-center">
+                                <?php
+                                    //Display Pagination Links
+                                    for ($i=1;$i<=$number_of_pages;$i++){ 
+                                        
+                                        if($page == $i){
+                                            echo '<li class="page-item active">';
+                                            echo '<a class="page-link" href="index.php?page=' . $i . '">' . $i . '</a>'; 
+                                            echo '</li>';
+                                        }else{
+                                            echo '<li class="page-item">';
+                                            echo '<a class="page-link" href="index.php?page=' . $i . '">' . $i . '</a>'; 
+                                            echo '</li>'; 
+                                        }
+                                    }
+                                    //END OF PAGINATION
+                                   ?>
+                                 
+                                </ul>  
+                               
+                            </div>
+                            <div class="col-md-4">
+                            
+                            </div>
+                        </div>
+                        
+                        <hr>
                         <div class="row">
+                  
                     <?php
-                    //Create SQL string for getting saving account data
-                    $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, s_rank.rank, s_rank.rank_color FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1 ORDER BY s_rank.rank_id ASC";
-                    
-                    // Run Query
-                    $result = mysqli_query($conn, $sql);
+             
+                            
+              
 
                     if (mysqli_num_rows($result) > 0) {
                         // output data of each row
@@ -249,5 +361,6 @@
   <?php include 'includes/footer.php'; ?>   
 
 </body>
-
+<script type="application/javascript" src="js/closeAlert.js"></script>
+    
 </html>
