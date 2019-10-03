@@ -17,6 +17,14 @@
     
     
     
+    //TEST
+   
+   // $params['page']   = 'testvalue';
+   // $new_query_string = http_build_query($params);
+    
+   // echo $new_query_string;
+    
+    
     //Start of form handling
     if(isset($_GET['submitAmount'])) {
         
@@ -53,11 +61,19 @@
             if(!isset($_GET['page'])){
                 $page = 1;
             }else{
-                $page = $_GET['page'];
+                //Only set page num if header value is a number
+                if(is_numeric($_GET['page'])){
+                    $page = $_GET['page'];  
+                }else{
+                    $page = 1;
+                }
+                
             }
 
             //SQL limit - Find the first result Example (Page 1 will be 0, page 2 will be 9)
             $this_page_first_result = ($page - 1) * $results_per_page;
+    
+            
 
     ?>
     
@@ -110,7 +126,7 @@
                         <!--Start Search Bar -->
                         <h1>Current Savings Amount</h1>
 
-                        <form method="GET" class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                        <form method="GET" class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?'. http_build_query($_GET);?>">
 
 
                             <input type="text" id="saveAmount" class="form-control" style="width:80%;" name="saveAmount" maxlength="16" value="<?php echo $saveAmount; ?>" placeholder="Enter savings amount here">
@@ -128,11 +144,14 @@
             </div>
         </section>
         
-        <section id="blog-featuredBody">
+        <!--START OF SAVER BAR -->
+        <section id="saverResultsBar">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                        <h2>Top Savings Accounts</h2>
+                    <div class="col-md-12 text-center">
+                         <h2>Top Savings Accounts</h2>
+                        <hr>
+                        
                         <div class = "row">
                               <!--START OF PAGINATION --> 
                             <div class="col-md-4">
@@ -153,17 +172,22 @@
                                     //Display Pagination Links
                                     for ($i=1;$i<=$number_of_pages;$i++){ 
                                         
+                                        //Print active link 
                                         if($page == $i){
+                                            
                                             echo '<li class="page-item active">';
-                                            echo '<a class="page-link" href="index.php?page=' . $i . '">' . $i . '</a>'; 
+                                            echo '<a class="page-link" href="index.php?' . htmlspecialchars(updateUrl('page',$i)) . '">' . $i . '</a>'; 
+                                          
                                             echo '</li>';
+                                        //Print normal link 
                                         }else{
+                                           
                                             echo '<li class="page-item">';
-                                            echo '<a class="page-link" href="index.php?page=' . $i . '">' . $i . '</a>'; 
+                                            echo '<a class="page-link" href="index.php?' . htmlspecialchars(updateUrl('page',$i)) . '">' . $i . '</a>'; 
                                             echo '</li>'; 
                                         }
                                     }
-                                    //END OF PAGINATION
+                                    ////END OF PAGINATION
                                    ?>
                                  
                                 </ul>  
@@ -174,14 +198,24 @@
                             </div>
                         </div>
                         
-                        <hr>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--END OF SAVER BAR --> 
+        
+        
+        <section id="blog-featuredBody">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+        
                         <div class="row">
                   
                     <?php
              
                             
               
-
                     if (mysqli_num_rows($result) > 0) {
                         // output data of each row
                         while($row = mysqli_fetch_assoc($result)) { 

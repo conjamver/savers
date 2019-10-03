@@ -65,10 +65,13 @@ body {
   .input-icon input {
     padding-left: 30px; }
 
+#saverResultsBar {
+  background-color: #3d3d3d;
+  color: #fefefe; }
+
 #blog-featuredBody {
   padding: 16px 0;
-  background-color: #6ab04c;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)); }
+  background-color: #6ab04c; }
   #blog-featuredBody h2 {
     color: #fefefe;
     text-align: center; }
@@ -77,7 +80,7 @@ body {
   margin-bottom: 32px; }
 
 .blog-featured {
-  background-color: white;
+  background-color: #fefefe;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   min-height: 100%;
   transition: 0.25;
