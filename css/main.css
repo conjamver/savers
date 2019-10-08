@@ -39,6 +39,8 @@ body {
     max-height: 200px; }
   #home-banner .errTxt {
     color: red; }
+  #home-banner .errInput {
+    background-color: #eb4d4b; }
 
 .home-body {
   padding: 24px 0; }

@@ -17,14 +17,6 @@
     
     
     
-    //TEST
-   
-   // $params['page']   = 'testvalue';
-   // $new_query_string = http_build_query($params);
-    
-   // echo $new_query_string;
-    
-    
     //Start of form handling
     if(isset($_GET['submitAmount'])) {
         
@@ -48,7 +40,6 @@
             $result = mysqli_query($conn, $sql);
     
     
-    
             //START OF PAGINATION
             $results_per_page = 9;
             $number_of_results = mysqli_num_rows($result);
@@ -56,25 +47,25 @@
             //Calculate the number of pages by dividing total by results per page
             $number_of_pages = ceil($number_of_results/$results_per_page);
 
-            //Dermine which page number visitor is on. Default is page 1
-
+            //////////PAGINATION VALIDATION//////////
+            //URL page number validation. IF GET page variable not set, default to 1.
             if(!isset($_GET['page'])){
                 $page = 1;
             }else{
                 //Only set page num if header value is a number
-                if(is_numeric($_GET['page'])){
+                //results per page must be less than total results
+                if(is_numeric($_GET['page']) && ($results_per_page * $_GET['page']) <= $number_of_results) {
                     $page = $_GET['page'];  
                 }else{
                     $page = 1;
                 }
                 
             }
+            //////////END PAGINATION VALIDATION//////////
 
             //SQL limit - Find the first result Example (Page 1 will be 0, page 2 will be 9)
             $this_page_first_result = ($page - 1) * $results_per_page;
-    
-            
-
+        
     ?>
     
 </head>
@@ -127,12 +118,14 @@
                         <h1>Current Savings Amount</h1>
 
                         <form method="GET" class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?'. http_build_query($_GET);?>">
-
-
+                                  
+                         
                             <input type="text" id="saveAmount" class="form-control" style="width:80%;" name="saveAmount" maxlength="16" value="<?php echo $saveAmount; ?>" placeholder="Enter savings amount here">
+                            
 
 
-                            <input type="submit" name="submitAmount" style="width:20%;" class="btn btn-success">
+                            <input type="submit" id="submitAmount" name="submitAmount" style="width:20%;" class="btn btn-success">
+                            
                             <!--End Search Bar -->
                         </form>
 
@@ -293,11 +286,15 @@
                                             <br>
                                             <?php echo $row["v_rate"];?>%
                                         </div>
+                                        
                                         <div class ="col-md-6 text-center">
+                                           
                                             <strong>Bonus Rate</strong>
                                             <br>
                                             <?php echo $row["b_rate"]; ?>%
                                         </div>
+                                        </div>
+                                        <div class = "row">
                                           <div class="col-md-12 text-center">
                                             <strong>Monthly interest</strong>
                                               <h4>
@@ -315,8 +312,9 @@
                                                   ?>
                                               </h4>
                                         </div>
+                                        </div>
                                     <!--END of saver rates -->
-                                    </div>
+                                    
                                     
                                     <!--Start of savings desc -->
                                     <div class="row">
@@ -396,5 +394,6 @@
 
 </body>
 <script type="application/javascript" src="js/closeAlert.js"></script>
+<script type="application/javascript" src="js/amtValidate.js"></script>
     
 </html>
