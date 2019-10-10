@@ -12,15 +12,20 @@
     
     //Declare variables
     $saveAmount = "";
+    $filterBy = "";
     $alertErr = "";
     $isError = false;
+    $orderByVal = "";
     
     
     
     //Start of form handling
     if(isset($_GET['submitAmount'])) {
         
+        //Sanitise values before we run SQL
         $saveAmount = cleanData($_GET["saveAmount"]);
+        $filterBy = cleanData($_GET["filterBy"]);
+        
         
         //Validate data
         if (!is_numeric($saveAmount)){
@@ -30,11 +35,34 @@
         }else{
             $isError = false;
         }
-    }
+        
+    
+     }
+    
+    
+    //DETERMINE HOW TO ORDER THE SQL RESULTS    
+   if(!isset($_GET['filterBy'])){
+        $orderByVal = "s_rank.rank_id ASC";
+    }else{
+        if($filterBy == "HT"){
+           $orderByVal = "s_rank.rank_id ASC";   
+             
+        }
+        else if($filterBy == "LT"){
+            $orderByVal = "s_rank.rank_id DESC";
+            
+        }else if($filterBy == "LE"){
+             $orderByVal = "savers.saver_date DESC";
+        }else{
+            //Default to this value if user does something fishy in URL
+             $orderByVal = "s_rank.rank_id ASC";   
+        }
+   }
+       
     
     
            //Create SQL string for getting saving account data
-            $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, s_rank.rank, s_rank.rank_color FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1 ORDER BY s_rank.rank_id ASC";
+            $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, s_rank.rank, s_rank.rank_color FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1 ORDER BY " . $orderByVal;
                     
             // Run Query
             $result = mysqli_query($conn, $sql);
@@ -53,8 +81,8 @@
                 $page = 1;
             }else{
                 //Only set page num if header value is a number
-                //results per page must be less than total results
-                if(is_numeric($_GET['page']) && ($results_per_page * $_GET['page']) <= $number_of_results) {
+                //results per page must be less than total results and greater than 0
+                if(is_numeric($_GET['page']) && ($results_per_page * $_GET['page']) <= $number_of_results && $_GET['page'] > 0){
                     $page = $_GET['page'];  
                 }else{
                     $page = 1;
@@ -65,6 +93,12 @@
 
             //SQL limit - Find the first result Example (Page 1 will be 0, page 2 will be 9)
             $this_page_first_result = ($page - 1) * $results_per_page;
+    
+                        
+            //re run query with limit
+            $sql2 = $sql . " LIMIT " . $this_page_first_result . "," . $results_per_page; 
+            $result = mysqli_query($conn,$sql2);
+
         
     ?>
     
@@ -114,7 +148,7 @@
                     <div class="col-md-2 text-center">
                     </div>
                     <div class="col-md-8 text-center">
-                        <!--Start Search Bar -->
+                        <!--|||Start Search Bar||| -->
                         <h1>Current Savings Amount</h1>
 
                         <form method="GET" class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?'. http_build_query($_GET);?>">
@@ -123,11 +157,22 @@
                             <input type="text" id="saveAmount" class="form-control" style="width:80%;" name="saveAmount" maxlength="16" value="<?php echo $saveAmount; ?>" placeholder="Enter savings amount here">
                             
 
-
                             <input type="submit" id="submitAmount" name="submitAmount" style="width:20%;" class="btn btn-success">
+                            <br>
+                            <!--Search Filters -->
+                           
                             
-                            <!--End Search Bar -->
+                            <div class="form-group">
+                               
+                                <select class="form-control-sm" id="filterAmount" name="filterBy">
+                                    <option value="HT" <?php if(isset($filterBy) && $filterBy=="HT") echo "selected";?>>Highest Tier</option>
+                                    <option value="LT" <?php if(isset($filterBy) && $filterBy=="LT") echo "selected";?>>Lowest Tier</option>
+                                    <option value="LE" <?php if(isset($filterBy) && $filterBy=="LE") echo "selected";?>>Last Edited</option>
+                                </select>
+                            </div>
+                            <!--||||End Search Bar|||| -->
                         </form>
+                        
 
                     </div>
 
@@ -145,51 +190,10 @@
                          <h2>Top Savings Accounts</h2>
                         <hr>
                         
-                        <div class = "row">
-                              <!--START OF PAGINATION --> 
-                            <div class="col-md-4">
-                                <strong><?php echo $this_page_first_result + 1 . "-" . $results_per_page * $page; ?> of <?php echo $number_of_results; ?> Results</strong>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                
-                                <?php
-                            
-                                    
-                                    //re run query with limit
-                                    $sql2 = $sql . " LIMIT " . $this_page_first_result . "," . $results_per_page; 
-                                    $result = mysqli_query($conn,$sql2);
-
-                                     ?>
-                                <ul class="pagination justify-content-center">
-                                <?php
-                                    //Display Pagination Links
-                                    for ($i=1;$i<=$number_of_pages;$i++){ 
-                                        
-                                        //Print active link 
-                                        if($page == $i){
-                                            
-                                            echo '<li class="page-item active">';
-                                            echo '<a class="page-link" href="index.php?' . htmlspecialchars(updateUrl('page',$i)) . '">' . $i . '</a>'; 
-                                          
-                                            echo '</li>';
-                                        //Print normal link 
-                                        }else{
-                                           
-                                            echo '<li class="page-item">';
-                                            echo '<a class="page-link" href="index.php?' . htmlspecialchars(updateUrl('page',$i)) . '">' . $i . '</a>'; 
-                                            echo '</li>'; 
-                                        }
-                                    }
-                                    ////END OF PAGINATION
-                                   ?>
-                                 
-                                </ul>  
-                               
-                            </div>
-                            <div class="col-md-4">
-                            
-                            </div>
-                        </div>
+                         <?php 
+                        //Output pagination code
+                        include 'includes/pagination.php'; 
+                        ?>
                         
                     </div>
                 </div>
@@ -357,6 +361,27 @@
             </div>
               <!--END About section -->
         </section>
+        
+        
+        <!--START OF SAVER BAR BOTTOM -->
+        <section id="saverResultsBar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <hr>
+                        
+                         <?php 
+                        //Output pagination code
+                        include 'includes/pagination.php'; 
+                        ?>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--END OF SAVER BAR BOTTOM --> 
+        
+        
         <section id="about">
             <!--START About section -->
             <div class="container">
