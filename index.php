@@ -16,6 +16,7 @@
     $alertErr = "";
     $isError = false;
     $orderByVal = "";
+    $orderByTxt = ""; //Used for display type of filter
     
     
     
@@ -45,14 +46,17 @@
         $orderByVal = "s_rank.rank_id ASC";
     }else{
         if($filterBy == "HT"){
-           $orderByVal = "s_rank.rank_id ASC";   
+           $orderByVal = "s_rank.rank_id ASC"; 
+            $orderByTxt = "Highest Tier";
              
         }
         else if($filterBy == "LT"){
             $orderByVal = "s_rank.rank_id DESC";
+            $orderByTxt = "Lowest Tier";
             
         }else if($filterBy == "LE"){
              $orderByVal = "savers.saver_date DESC";
+            $orderByTxt = "Last Edited";
         }else{
             //Default to this value if user does something fishy in URL
              $orderByVal = "s_rank.rank_id ASC";   
@@ -62,7 +66,7 @@
     
     
            //Create SQL string for getting saving account data
-            $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, s_rank.rank, s_rank.rank_color FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1 ORDER BY " . $orderByVal;
+            $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, s_rank.rank, s_rank.rank_color, s_points.point_type, s_points.point_desc FROM ((banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id) LEFT JOIN s_points ON savers.saver_id = s_points.s_id WHERE savers.visible = 1 ORDER BY " . $orderByVal;
                     
             // Run Query
             $result = mysqli_query($conn, $sql);
@@ -82,7 +86,7 @@
             }else{
                 //Only set page num if header value is a number
                 //results per page must be less than total results and greater than 0
-                if(is_numeric($_GET['page']) && ($results_per_page * $_GET['page']) <= $number_of_results && $_GET['page'] > 0){
+                if(is_numeric($_GET['page']) && ($results_per_page * $_GET['page']) <= $number_of_results  + $results_per_page && $_GET['page'] > 0){
                     $page = $_GET['page'];  
                 }else{
                     $page = 1;
@@ -99,7 +103,7 @@
             $sql2 = $sql . " LIMIT " . $this_page_first_result . "," . $results_per_page; 
             $result = mysqli_query($conn,$sql2);
 
-        
+        //echo ($results_per_page * $_GET['page']);  **DEBUG PURPOSES
     ?>
     
 </head>
@@ -187,7 +191,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                         <h2>Top Savings Accounts</h2>
+                         <h2>
+                             Comparing Savings Accounts
+                        </h2>
                         <hr>
                         
                          <?php 
@@ -323,18 +329,54 @@
                                     <!--Start of savings desc -->
                                     <div class="row">
                                         <div class="col-md-12">
-                                        <hr>
-                                        <strong>Bonus Condition</strong>
-                                        <p><?php echo $row["req"]; ?></p>  
+                                            <hr>
+                                            <strong>Bonus Condition
+                                                <br>
+                                                <small>
+                                                    <?php echo $row["req"]; ?>
+                                                </small>
+                                            </strong>
                                         </div>
                                     </div>    
                                     <!--END of of savings desc -->
                                     <hr>
                                     
-                                    <!--Start of savings Pros -->
+                                    <!--Start of savings Pointss -->
+                                    <div class = "row">
+                                        <!--Pros -->
+                                        <div class="col-md-12">
+                                            <strong>Strengths
+                                            <br>
+                                            <small>
+                                            <?php 
+                                                if($row["point_type"] == 1){
+                                                    echo '<i class="far fa-smile-beam"></i> ';
+                                                    echo $row["point_desc"];  
+                                                }  
+                                            ?>
+                                                </small>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <!--Cons -->
+                                    <div class = "row">
+                                        <div class="col-md-12">
+                                                 <strong>Weakness
+                                            <br>
+                                            <small>
+                                                
+                                            <?php 
+                                                if($row["point_type"] == 2){
+                                                    echo '<i class="far fa-frown"></i> ';
+                                                   echo $row["point_desc"];  
+                                                }  
+                                            ?>
+                                                </small>
+                                            </strong>
+                                        </div>
+                                    </div>
                                     
-                                    
-                                    <!--End of savings Pros -->
+                                    <!--End of savings Points -->
                                     <hr>
                                     <!--Start of footer -->
                                     <a href="<?php echo $row["bank_url"]; ?>" target="_blank"><i class="fas fa-external-link-alt"></i> Visit Website</a>

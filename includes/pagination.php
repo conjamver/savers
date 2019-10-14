@@ -1,7 +1,36 @@
 <div class = "row">
       <!--START OF PAGINATION --> 
     <div class="col-md-4">
-        <strong>Showing <?php echo $this_page_first_result + 1 . "-" . $results_per_page * $page; ?> of <?php echo $number_of_results; ?> Results</strong>
+        <strong>
+            Showing <?php echo $this_page_first_result + 1 . "-" . $results_per_page * $page; ?> of <?php echo $number_of_results; ?> Results
+            <br>
+            <small class="badge badge-secondary">
+                <i class="fas fa-filter"></i> Filter: 
+                <?php 
+                
+                
+                if(isset($_GET['filterBy'])){
+                        echo $orderByTxt; 
+                    }else{
+                        echo "Highest Tier";
+                    }
+                
+                ?>
+            </small>
+            <small class="badge badge-success">
+                <i class="fas fa-coins"></i> 
+                <?php 
+                    if(isset($_GET['saveAmount'])){
+                        echo "$" . number_format($saveAmount); 
+                    }else{
+                        echo "---";
+                    }
+                
+                    
+                    
+                ?>
+            </small>
+        </strong>
     </div>
     <div class="col-md-4 text-center">
 
