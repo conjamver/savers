@@ -2,7 +2,7 @@
       <!--START OF PAGINATION --> 
     <div class="col-md-4">
         <strong>
-            Showing <?php echo $this_page_first_result + 1 . "-" . $results_per_page * $page; ?> of <?php echo $number_of_results; ?> Results
+            Showing <?php echo $this_page_first_result + 1 . "-" . ($results_per_page * $page - ($results_per_page - $resultCount)); ?> of <?php echo $number_of_results; ?> Results
             <br>
             <small class="badge badge-secondary">
                 <i class="fas fa-filter"></i> Filter: 

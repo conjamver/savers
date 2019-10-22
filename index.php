@@ -15,6 +15,7 @@
     $filterBy = "";
     $alertErr = "";
     $isError = false;
+    $isSuccess = "";
     $orderByVal = "";
     $orderByTxt = ""; //Used for display type of filter
     
@@ -35,6 +36,7 @@
             $isError = true;
         }else{
             $isError = false;
+            $isSuccess = true; //Display Success Message
         }
         
     
@@ -74,6 +76,7 @@
     
             //START OF PAGINATION
             $results_per_page = 9;
+            
             $number_of_results = mysqli_num_rows($result);
 
             //Calculate the number of pages by dividing total by results per page
@@ -102,6 +105,11 @@
             //re run query with limit
             $sql2 = $sql . " LIMIT " . $this_page_first_result . "," . $results_per_page; 
             $result = mysqli_query($conn,$sql2);
+            
+            $resultCount = mysqli_num_rows($result);//Counts actual results from query
+            
+    
+            //echo $this_page_first_result = ($page - 1) * $results_per_page;
 
         //echo ($results_per_page * $_GET['page']);  **DEBUG PURPOSES
     ?>
@@ -138,6 +146,33 @@
     
                 </div>
             </div> 
+   <?php }
+    if ($isSuccess == true){
+        //Display Success message
+        ?>
+        <div id="alertContainer" class="alert alertSuccess">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-11 text-left">
+                              <strong><i class="far fa-check-circle"></i> Success! </strong><?php echo "Interest rates for $" . $_GET['saveAmount'] . " have been generated below."; ?>
+                        </div>
+                        
+                        <div class="col-1 text-right">
+                             <!--Exit alert button --> 
+                            <span class="alertExit">
+                                <i class="far fa-times-circle"></i>
+                            </span>
+                        </div>
+                        
+                    </div>
+                     
+                   
+    
+                </div>
+            </div> 
+        
+        
+        
    <?php }
     ?>
 
