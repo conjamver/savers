@@ -324,26 +324,31 @@
                                   
                                     <!--Start of saver rates -->
                                     <div class="row">
-                                    
-                                        <div class ="col-md-6 text-center">
-                                            
+
+                                        <div class="col-md-6 text-center">
+
                                             <strong>Variable Rate</strong>
                                             <br>
                                             <?php echo $row["v_rate"];?>%
                                         </div>
-                                        
-                                        <div class ="col-md-6 text-center">
-                                           
+
+                                        <div class="col-md-6 text-center">
+
                                             <strong>Bonus Rate</strong>
                                             <br>
                                             <?php echo $row["b_rate"]; ?>%
                                         </div>
-                                        </div>
-                                        <div class = "row">
-                                          <div class="col-md-12 text-center">
-                                            <strong>Monthly interest</strong>
-                                              <h4>
-                                                  <?php 
+                                    </div>
+                                       
+                                        <div class="amtViewInt">
+                                            <div class="row">
+                                                <!---Monthly Interest--->
+                                                <div class="col-md-12 text-center s_viewType">
+
+
+                                                    <strong>Monthly interest</strong>
+                                                    <h4>
+                                                        <?php 
                                                         //Only print if value is numeric and value is set.
                                                         if (isset($saveAmount) && is_numeric($saveAmount)){
                                                               echo "$" . number_format($saveAmount * (($row["v_rate"] + $row["b_rate"]) / 100) / 12,"2"); 
@@ -351,23 +356,53 @@
                                                             echo "___";
                                                         }
                                                         
-                                                      
-                                                       // echo $row["v_rate"] + $row["b_rate"];
-                                                        
                                                   ?>
-                                              </h4>
-                                        </div>
-                                        </div>
-                                    <!--END of saver rates -->
+                                                    </h4>
+
+
+                                                    <!---END Monthly Interest--->
+
+                                                </div>
+                                                
+                                                    <!---Yearly Interest--->
+                                                    <div class="col-md-12 text-center inactive s_viewType">
+                                                        <strong>Yearly interest</strong>
+                                                        <h4>
+                                                            <?php 
+                                                        //Only print if value is numeric and value is set.
+                                                        if (isset($saveAmount) && is_numeric($saveAmount)){
+                                                              echo "$" . number_format($saveAmount * (($row["v_rate"] + $row["b_rate"]) / 100),"2"); 
+                                                        }else{
+                                                            echo "___";
+                                                        }
+ 
+                                                  ?>
+                                                        </h4>
+                                                    </div> <!---END Yearly Interest--->
+
+                                            </div>
+                                            <!---Saving rate controls--->
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <button class="btn btn-sm btn-outline-primary s_btnMonth">Month</button>
+                                                    <button class="btn btn-sm btn-outline-primary s_btnYear">Year</button>
+                                                </div>
+
+                                            </div>
+                                        </div><!---END Saving Interview view interface--->
+
+                                        <!---END Saving rate controls--->
+                                        <!--END of saver rates -->
                                     
                                     
                                     <!--Start of savings desc -->
                                     <div class="row">
                                         <div class="col-md-12">
                                             <hr>
-                                            <strong>Bonus Condition
+                                            <strong><i class="far fa-star"></i> Bonus Condition
                                                 <br>
                                                 <small>
+                                                        
                                                     <?php echo $row["req"]; ?>
                                                 </small>
                                             </strong>
@@ -517,5 +552,7 @@
 </body>
 <script type="application/javascript" src="js/closeAlert.js"></script>
 <script type="application/javascript" src="js/amtValidate.js"></script>
+<script type="application/javascript" src="js/s_calcView.js"></script>
+
     
 </html>

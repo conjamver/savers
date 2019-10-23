@@ -72,7 +72,7 @@
         <?php
         ////Next button functionality/////   
         //Disable if we are on last page    
-        if($results_per_page * $page == $number_of_results) {
+        if($results_per_page * $page - ($results_per_page - $resultCount) == $number_of_results) {
             echo '<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>';
         }else{
             echo '<li class="page-item"><a class="page-link" href="index.php?'. htmlspecialchars(updateUrl('page',$page + 1)) .'">Next</a></li>';

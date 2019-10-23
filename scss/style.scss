@@ -26,9 +26,17 @@ body{
     background-color:$d_white; 
 }
 
+
+
 .inactive{
     display:none;
 }
+
+.s_active{
+    display:block;
+}
+
+
 
 .alertErr{
     background-color:$red;

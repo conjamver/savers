@@ -11,6 +11,9 @@ body {
 .inactive {
   display: none; }
 
+.s_active {
+  display: block; }
+
 .alertErr {
   background-color: #eb4d4b; }
 
