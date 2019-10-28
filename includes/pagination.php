@@ -83,7 +83,8 @@
         </ul>  
 
     </div>
+    <!--START OF extra controls--> 
     <div class="col-md-4">
-
+        <button class="btn btn-sm btn-light s_btnAllYr">Show all yearly</button>
     </div>
 </div>

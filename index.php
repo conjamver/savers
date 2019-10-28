@@ -384,7 +384,7 @@
                                             <!---Saving rate controls--->
                                             <div class="row">
                                                 <div class="col-md-12 text-center">
-                                                    <button class="btn btn-sm btn-outline-primary s_btnMonth">Month</button>
+                                                    <button class="btn btn-sm btn-outline-primary s_btnMonth active">Month</button>
                                                     <button class="btn btn-sm btn-outline-primary s_btnYear">Year</button>
                                                 </div>
 
