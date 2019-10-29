@@ -34,6 +34,13 @@ $( document ).ready(function() {
                         }
 
                     }
+                
+                //Determine whether to disable buttons
+                if(countView("s_viewTypeYr") == 0){
+                    alert("All Gone");
+                }else{
+                    //Activate button again
+                }
 
             });
   
@@ -62,6 +69,15 @@ $( document ).ready(function() {
                         }
                        
                     }
+                //alert(countView("s_viewTypeYr"));
+                
+                 //Determine whether to disable buttons
+                 if(countView("s_viewTypeYr") == 0){
+                    alert("All Gone");
+                }else{
+                    //Activate button again
+                }
+
                    
             });
             
@@ -107,16 +123,48 @@ $( document ).ready(function() {
 
 
                      }//End of button looper
-                     
-                     
+
                  }//End of Saver Item Loops
+           
+                 
+                //Determine whether to disable buttons
+                if(countView("s_viewTypeYr") == 0){
+                    
+                    alert("All Gone");
+                }else{
+                    //Activate button again
+                }
 
-             });
 
-         }//End of Year button looper.
+             });//End of click event listener
 
-         
+         }//End of Year all button looper.
+
+    
+    
+    //function that count s_viewType elements. Takes class name parameter
+    function countView(myClass){
+        var yearCount = 0;
+        var s_viewTypeYr = document.getElementsByClassName(myClass);
+        
+        //Loop through all savers with year class?
+        for (let i = 0; i < s_viewTypeYr.length; i++) {
+             
+            //alert(s_viewTypeYr[i].textContent);
+            if(s_viewTypeYr[i].classList.contains("inactive")){
+                yearCount++;
+            }
+            
+        }
+       return yearCount;
+    }//End of count function
+    
+    
+   
+    
 
 }); //End of DOCUMENT GET READY
+
+
     
 

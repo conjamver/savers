@@ -343,7 +343,7 @@
                                         <div class="amtViewInt">
                                             <div class="row">
                                                 <!---Monthly Interest--->
-                                                <div class="col-md-12 text-center s_viewType">
+                                                <div class="col-md-12 text-center s_viewType s_viewTypeMth">
 
 
                                                     <strong>Monthly interest</strong>
@@ -365,7 +365,7 @@
                                                 </div>
                                                 
                                                     <!---Yearly Interest--->
-                                                    <div class="col-md-12 text-center inactive s_viewType">
+                                                    <div class="col-md-12 text-center inactive s_viewType s_viewTypeYr">
                                                         <strong>Yearly interest</strong>
                                                         <h4>
                                                             <?php 
