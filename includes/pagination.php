@@ -86,5 +86,6 @@
     <!--START OF extra controls--> 
     <div class="col-md-4">
         <button class="btn btn-sm btn-light s_btnAllYr">Show all yearly</button>
+        <button class="btn btn-sm btn-light s_btnAllMth">Show all month</button>
     </div>
 </div>

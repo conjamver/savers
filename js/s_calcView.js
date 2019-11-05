@@ -4,6 +4,7 @@ $( document ).ready(function() {
         var s_btnYear = document.getElementsByClassName("s_btnYear");
         var s_btnMonth = document.getElementsByClassName("s_btnMonth");
         var s_btnAllYr = document.getElementsByClassName("s_btnAllYr");
+        var s_btnAllMth = document.getElementsByClassName("s_btnAllMth");
         var amtViewInt = document.getElementsByClassName("amtViewInt");  
         var myIndex = 0;
        
@@ -37,10 +38,22 @@ $( document ).ready(function() {
                 
                 //Determine whether to disable buttons
                 if(countView("s_viewTypeYr") == 0){
-                    alert("All Gone");
+                    toggleBtn(true,s_btnAllYr);
+                    
                 }else{
                     //Activate button again
+                    toggleBtn(false,s_btnAllYr);
                 }
+                
+                
+                if(countView("s_viewTypeMth") == 0){
+                    toggleBtn(true,s_btnAllMth);
+                    
+                }else{
+                    //Activate button again
+                    toggleBtn(false,s_btnAllMth);
+                    
+                }    
 
             });
   
@@ -72,11 +85,23 @@ $( document ).ready(function() {
                 //alert(countView("s_viewTypeYr"));
                 
                  //Determine whether to disable buttons
-                 if(countView("s_viewTypeYr") == 0){
-                    alert("All Gone");
+                if(countView("s_viewTypeYr") == 0){
+                    toggleBtn(true,s_btnAllYr);
+                    
                 }else{
                     //Activate button again
+                    toggleBtn(false,s_btnAllYr);
                 }
+                
+              if(countView("s_viewTypeMth") == 0){
+                    toggleBtn(true,s_btnAllMth);
+                    
+                }else{
+                    //Activate button again
+                    toggleBtn(false,s_btnAllMth);
+                    
+                }
+                
 
                    
             });
@@ -127,14 +152,28 @@ $( document ).ready(function() {
                  }//End of Saver Item Loops
            
                  
-                //Determine whether to disable buttons
+                 //Determine whether to disable buttons
                 if(countView("s_viewTypeYr") == 0){
+                    toggleBtn(true,s_btnAllYr);
                     
-                    alert("All Gone");
                 }else{
                     //Activate button again
+                    toggleBtn(false,s_btnAllYr);
                 }
-
+                 
+                 
+               //alert(countView("s_viewTypeMth"));
+                 
+                 if(countView("s_viewTypeMth") == 0){
+                    toggleBtn(true,s_btnAllMth);
+                    
+                }else{
+                    //Activate button again
+                    toggleBtn(false,s_btnAllMth);
+                    
+                }
+                 
+                
 
              });//End of click event listener
 
@@ -142,20 +181,46 @@ $( document ).ready(function() {
 
     
     
+    
+    
+    
+    
+    ////**************FUNCTIONS OF SAVER ITEMS*********************////
+    
+    
+    //toggleOn is boolean, 
+    function toggleBtn(toggleOn,myClass){
+        //declare var
+        var thisClass = myClass;
+        
+        if(toggleOn == true){
+            for(let z = 0; z < thisClass.length; z++){
+                thisClass[z].classList.add("disabled");
+            }
+        //Toggle Off
+        }else{ 
+             for(let z = 0; z < thisClass.length; z++){
+                thisClass[z].classList.remove("disabled");
+             }
+        }
+    }
+    
+    
     //function that count s_viewType elements. Takes class name parameter
     function countView(myClass){
         var yearCount = 0;
-        var s_viewTypeYr = document.getElementsByClassName(myClass);
+        var thisClass = document.getElementsByClassName(myClass);
         
         //Loop through all savers with year class?
-        for (let i = 0; i < s_viewTypeYr.length; i++) {
+        for (let i = 0; i < thisClass.length; i++) {
              
             //alert(s_viewTypeYr[i].textContent);
-            if(s_viewTypeYr[i].classList.contains("inactive")){
+            if(thisClass[i].classList.contains("inactive")){
                 yearCount++;
             }
             
         }
+        
        return yearCount;
     }//End of count function
     
