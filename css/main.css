@@ -49,6 +49,34 @@ body {
   #home-banner .errInput {
     background-color: #eb4d4b; }
 
+#saveContainer {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center; }
+  #saveContainer i {
+    position: absolute;
+    color: black;
+    font-size: 16px;
+    padding-left: 8px; }
+  #saveContainer input[type=text] {
+    font-weight: bold;
+    padding-left: 20px; }
+
+#saveFiltersOuter {
+  margin: 4px 0; }
+
+#saveFilters {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center; }
+  #saveFilters .form-check {
+    margin-left: 20px; }
+  #saveFilters #filterAmount {
+    background-color: transparent;
+    color: #fefefe; }
+    #saveFilters #filterAmount option {
+      color: black; }
+
 .home-body {
   padding: 24px 0; }
   .home-body h2 {
@@ -57,7 +85,7 @@ body {
 #home-benefits {
   background-color: #fefefe; }
   #home-benefits i {
-    padding: 10px 0;
+    padding: 12px 0;
     font-size: 64px;
     color: #6ab04c; }
 
@@ -76,7 +104,8 @@ body {
 
 #saverResultsBar {
   background-color: #3d3d3d;
-  color: #fefefe; }
+  color: #fefefe;
+  padding: 4px 0px; }
 
 #blog-featuredBody {
   padding: 16px 0;
@@ -116,6 +145,28 @@ body {
     padding: 4px;
     font-size: 14px;
     margin-bottom: 4px; }
+
+.tierSelector {
+  border-radius: 8px;
+  margin-bottom: 8px;
+  padding: 4px 0;
+  color: white; }
+
+.tierSelector:hover {
+  cursor: pointer;
+  background-color: black; }
+
+.tier-s {
+  background-color: #8e44ad; }
+
+.tier-a {
+  background-color: #3498db; }
+
+.tier-b {
+  background-color: #27ae60; }
+
+.tier-c {
+  background-color: #f39c12; }
 
 #about {
   padding: 16px 0;

@@ -1,3 +1,4 @@
+
 <div class = "row">
       <!--START OF PAGINATION --> 
     <div class="col-md-4">
@@ -33,7 +34,7 @@
         </strong>
     </div>
     <div class="col-md-4 text-center">
-
+       
         <ul class="pagination justify-content-center">
 
         <?php
@@ -85,7 +86,11 @@
     </div>
     <!--START OF extra controls--> 
     <div class="col-md-4">
-        <button class="btn btn-sm btn-light s_btnAllYr">Show all yearly</button>
-        <button class="btn btn-sm btn-light s_btnAllMth">Show all month</button>
+        <strong>Toggle by:</strong>
+        <br>
+        
+        <button class="btn btn-sm btn-light s_btnAllMth">Month</button>
+        <button class="btn btn-sm btn-light s_btnAllYr">Year</button>
+         
     </div>
 </div>

@@ -7,10 +7,26 @@ $( document ).ready(function() {
         var s_btnAllMth = document.getElementsByClassName("s_btnAllMth");
         var amtViewInt = document.getElementsByClassName("amtViewInt");  
         var myIndex = 0;
-       
-        
-
     
+        
+        //Determine what buttons to disable on page load.
+         if (countView("s_viewTypeYr") == 0) {
+             toggleBtn(true, s_btnAllYr);
+
+         } else {
+             
+             toggleBtn(false, s_btnAllYr);
+         }
+
+         if (countView("s_viewTypeMth") == 0) {
+             toggleBtn(true, s_btnAllMth);
+
+         } else {
+        
+             toggleBtn(false, s_btnAllMth);
+
+         }
+       
         //Looper for yearly view 
         for(let i = 0; i < s_btnYear.length; i++){
             s_btnYear[i].addEventListener("click", function(){ 
@@ -143,6 +159,76 @@ $( document ).ready(function() {
                          
                          //Add active class to year button
                          if(s_btn[x].classList.contains("s_btnYear")){
+                            s_btn[x].classList.add("active");
+                         }
+
+
+                     }//End of button looper
+
+                 }//End of Saver Item Loops
+           
+                 
+                 //Determine whether to disable buttons
+                if(countView("s_viewTypeYr") == 0){
+                    toggleBtn(true,s_btnAllYr);
+                    
+                }else{
+                    //Activate button again
+                    toggleBtn(false,s_btnAllYr);
+                }
+                 
+                 
+               //alert(countView("s_viewTypeMth"));
+                 
+                 if(countView("s_viewTypeMth") == 0){
+                    toggleBtn(true,s_btnAllMth);
+                    
+                }else{
+                    //Activate button again
+                    toggleBtn(false,s_btnAllMth);
+                    
+                }
+                 
+                
+
+             });//End of click event listener
+
+         }//End of Year all button looper.
+    
+    
+    
+    
+        //Button that toggles monthly view on all savers visible.
+         for (let i = 0; i < s_btnAllMth.length; i++) {
+             s_btnAllMth[i].addEventListener("click", function () {
+
+                 myindex = i;
+                 //Run looper when we click button.
+                 for (let y = 0; y < amtViewInt.length; y++) {
+
+                     //Get buttons in each individual saver item
+                     var s_btn = amtViewInt[y].getElementsByTagName("button");
+                     var s_viewType = amtViewInt[y].getElementsByClassName("s_viewType");
+                     
+                     
+                     //Show/Hide elements
+                    if(s_viewType[0].classList.contains('inactive')) {
+                        s_viewType[1].classList.add("inactive");
+                        s_viewType[0].classList.remove("inactive");
+                    }
+                     
+                     
+                     //loop through all buttons within saver
+                     for (let x = 0; x < s_btn.length; x++) {
+                        
+                         //Remove active class from all month buttons
+                         if(!s_btn[x].classList.contains("s_btnMonth")){
+                             s_btn[x].classList.remove("active");
+                        
+                         }
+                         
+                         //Add active class to year button
+                         if(s_btn[x].classList.contains("s_btnMonth")){
                             s_btn[x].classList.add("active");
                          }
 

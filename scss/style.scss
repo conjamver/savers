@@ -113,6 +113,57 @@ body{
 
 
 
+#saveContainer{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    
+    //Center Icon
+    i{
+        position: absolute;
+        color:black;
+        font-size: 16px;
+        padding-left:8px;
+        
+        //background-color:green;
+    }
+    
+    input[type=text]{
+        font-weight: bold;
+        padding-left:20px;
+        
+        
+    }
+}
+
+#saveFiltersOuter{
+    margin:4px 0;
+}
+
+#saveFilters{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    
+    
+    .form-check{
+        margin-left:20px;
+    }
+    
+    #filterAmount{
+        background-color:transparent;
+        color:$l_white;
+        
+        
+        
+        option{
+            color:black;
+        }
+    }
+    
+}
+
+
 .home-body{
     padding:24px 0;
     //background-color:$d_white;
@@ -126,7 +177,7 @@ body{
 #home-benefits{
     background-color:$l_white;
     i{
-        padding:10px 0;
+        padding:12px 0;
         font-size:64px;
         color:$d_primary;
     }
@@ -153,6 +204,7 @@ body{
 #saverResultsBar{
     background-color:$secondary;
     color:$l_white;
+    padding:4px 0px;
 }
 
 //Purple background that stretches across screen
@@ -232,6 +284,44 @@ body{
 
 
 //END OF SAVER ITEMS
+
+
+//START Saver tier legend
+
+
+.tierSelector{
+    
+    border-radius:8px;
+    margin-bottom:8px;
+    padding:4px 0;
+    color:white;
+    
+   
+}
+.tierSelector:hover{
+    cursor:pointer;
+    background-color:black;
+}
+
+ .tier-s{
+        background-color:#8e44ad;
+    }
+.tier-a{
+        background-color:#3498db;
+    }
+.tier-b{
+        background-color:#27ae60;
+    }
+.tier-c{
+        background-color:#f39c12;
+    }
+
+
+
+
+
+//END Saver tier legend
+
 
 
 ////ABOUT SECTION

@@ -186,29 +186,59 @@
                 <div class="row">
                     <div class="col-md-2 text-center">
                     </div>
-                    <div class="col-md-8 text-center">
+                    <div class="col-md-8">
                         <!--|||Start Search Bar||| -->
-                        <h1>Current Savings Amount</h1>
-
-                        <form method="GET" class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?'. http_build_query($_GET);?>">
+                        <h1 class="text-center">Current Savings Amount</h1>
+                        
+                        <form method="GET" class="" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?'. http_build_query($_GET);?>">
                                   
-                         
-                            <input type="text" id="saveAmount" class="form-control" style="width:80%;" name="saveAmount" maxlength="16" value="<?php echo $saveAmount; ?>" placeholder="Enter savings amount here">
+                         <!--Saver bar -->
+                         <div id="saveContainer">
+                            <i class="fas fa-dollar-sign inputIcon"></i>
+                                
+                                 <input type="text" id="saveAmount" class="form-control" style="width:80%;" name="saveAmount" maxlength="16" value="<?php echo $saveAmount; ?>" placeholder="Enter savings amount here">
                             
 
-                            <input type="submit" id="submitAmount" name="submitAmount" style="width:20%;" class="btn btn-success">
-                            <br>
-                            <!--Search Filters -->
-                           
+                             <input type="submit" id="submitAmount" name="submitAmount" style="width:20%;" class="btn btn-success">
+                         </div>
                             
-                            <div class="form-group">
-                               
+                       
+                            <!--Search Filters -->
+                            
+                            <div id="saveFiltersOuter">
+                            <strong>Sort by:</strong>
+                            
+                            <div id="saveFilters">
                                 <select class="form-control-sm" id="filterAmount" name="filterBy">
                                     <option value="HT" <?php if(isset($filterBy) && $filterBy=="HT") echo "selected";?>>Highest Tier</option>
                                     <option value="LT" <?php if(isset($filterBy) && $filterBy=="LT") echo "selected";?>>Lowest Tier</option>
                                     <option value="LE" <?php if(isset($filterBy) && $filterBy=="LE") echo "selected";?>>Last Edited</option>
                                 </select>
+
+
+                                <!--Exclude check boxes -->
+                                <!--Exclude lower than ctier -->
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="ex_ctier" value="ctier">
+                                    <label class="form-check-label" for="ex_ctier">
+                                        > C Tier only
+                                    </label>
+                                </div>
+                                
+                                <!--Exclude introductory rate accounts -->
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="ex_intro" value="intro">
+                                    <label class="form-check-label" for="ex_intro">
+                                        No introductory rate
+                                    </label>
+                                </div>
+
+
+
                             </div>
+                          </div>
+                        <!--END OF Search Filters -->
+                      
                             <!--||||End Search Bar|||| -->
                         </form>
                         
@@ -513,6 +543,75 @@
         </section>
         <!--END OF SAVER BAR BOTTOM --> 
         
+        <!--====START Saver tier legend dashboard ====--> 
+        <section id="saverTiers">
+            
+        <!--Header --> 
+          <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h1>Saver Tiers</h1>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <div class="tierSelector tier-s" style="">
+                            <h2>S Tier</h2>
+                        </div>
+                        <div class="tierSelector tier-a" style="">
+                            <h2>A Tier</h2>
+                        </div> 
+                        <div class="tierSelector tier-b" style="">
+                            <h2>B Tier</h2>
+                        </div> 
+                        <div class="tierSelector tier-c" style="">
+                            <h2>C Tier and below </h2>
+                        </div> 
+                    </div>
+                    <div class="col-md-6 text-left">
+                        <div class="tierView">
+                            <h2>S TIER</h2>
+                            <p>S Tier will ensure maximum savings with great interest rates that are easy to achieve. This rank also has unique features to aid saving such as custom round ups, fee free ATMs and user friendly saving reports.
+                            
+                            <p>No. of S Tier Accounts: xxxx</p>
+                        </div>
+                        <div class="tierView">
+                            <h2>A TIER</h2>
+                            <p>Fee free accounts that have balanced rates</p>
+                            <ul>
+                                <li>High interest rates with no penalties</li>
+                               
+                                
+                            </ul>
+                        </div>
+                        <div class="tierView">
+                            <h2>B TIER</h2>
+                            <p>These fee free saving accounts feature generous interest rates where the bonus can be achieved easily. These accounts will have poor variable rates if bonuses are not met. </p>
+                            
+                        </div>
+                        <div class="tierView">
+                            <h2>C TIER and below</h2>
+                            <p>For long term saving, it is advised to seek better options. Any saving accounts with monthly fees, rough penalties and a poor variables rate are characteristics to avoid.</p>
+                            
+                            <p>Below are the characteristics for lower tier accounts</p>
+                            <ul>
+                                <li>Any monthly admin fees for accounts</li>
+                                <li>Bonus only involves introductory rate</li>
+                                <li>Poor interest rate</li>   
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!--====END Saver tier legend dashboard ====--> 
+        
         
         <section id="about">
             <!--START About section -->
@@ -553,6 +652,7 @@
 <script type="application/javascript" src="js/closeAlert.js"></script>
 <script type="application/javascript" src="js/amtValidate.js"></script>
 <script type="application/javascript" src="js/s_calcView.js"></script>
+<script type="application/javascript" src="js/s_tierView.js"></script>
 
     
 </html>
