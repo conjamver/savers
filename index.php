@@ -18,6 +18,7 @@
     $isSuccess = "";
     $orderByVal = "";
     $orderByTxt = ""; //Used for display type of filter
+    $excludeTxt = "";
     
     
     
@@ -43,7 +44,7 @@
      }
     
     
-    //DETERMINE HOW TO ORDER THE SQL RESULTS    
+    ///DETERMINE HOW TO ORDER THE SQL RESULTS///    
    if(!isset($_GET['filterBy'])){
         $orderByVal = "s_rank.rank_id ASC";
     }else{
@@ -64,11 +65,21 @@
              $orderByVal = "s_rank.rank_id ASC";   
         }
    }
-       
+    
+     ///DETERMINE WHAT ITEMS TO EXCLUDE///
+    
+    if(isset($_GET['ex_ctier'])){
+        
+        $excludeTxt = $excludeTxt . " AND s_rank.rank_id < 5 ";
+    }
+    if(isset($_GET['ex_intro'])){
+        //$excludeTxt = $excludeTxt . " AND savers.rank_id < 4 ";
+    }
+          
     
     
            //Create SQL string for getting saving account data
-            $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, s_rank.rank, s_rank.rank_color FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1 ORDER BY " . $orderByVal;
+            $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, s_rank.rank, s_rank.rank_color FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1" . $excludeTxt . "ORDER BY " . $orderByVal;
                     
             // Run Query
             $result = mysqli_query($conn, $sql);
@@ -217,9 +228,10 @@
 
 
                                 <!--Exclude check boxes -->
+                               
                                 <!--Exclude lower than ctier -->
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="ex_ctier" value="ctier">
+                                    <input class="form-check-input" type="checkbox" id="ex_ctier" value="true" name="ex_ctier" <?php if(isset($_GET['ex_ctier'])) echo "checked"; ?>>
                                     <label class="form-check-label" for="ex_ctier">
                                         > C Tier only
                                     </label>
@@ -227,7 +239,7 @@
                                 
                                 <!--Exclude introductory rate accounts -->
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="ex_intro" value="intro">
+                                    <input class="form-check-input" type="checkbox" id="ex_intro" value="true" name="ex_intro" <?php if(isset($_GET['ex_intro'])) echo "checked"; ?>>
                                     <label class="form-check-label" for="ex_intro">
                                         No introductory rate
                                     </label>
