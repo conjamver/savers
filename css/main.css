@@ -89,6 +89,19 @@ body {
     font-size: 64px;
     color: #6ab04c; }
 
+#scrollBut {
+  border-radius: 50%;
+  position: fixed;
+  /* Fixed/sticky position */
+  bottom: 20px;
+  /* Place the button at the bottom of the page */
+  right: 30px;
+  /* Place the button 30px from the right */
+  z-index: 99;
+  /* Make sure it does not overlap */ }
+  #scrollBut i {
+    font-size: 24px; }
+
 .input-icon {
   position: relative; }
   .input-icon span {
@@ -116,6 +129,14 @@ body {
 
 .saver-outerBody {
   margin-bottom: 32px; }
+
+.s_viewType h4 {
+  margin: 0px; }
+.s_viewType span {
+  font-size: 12px; }
+
+.hr-noPad {
+  margin-bottom: 0px; }
 
 .blog-featured {
   background-color: #fefefe;

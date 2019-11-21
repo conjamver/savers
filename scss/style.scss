@@ -184,6 +184,22 @@ body{
 }
 
 
+#scrollBut{
+    border-radius:50%;
+    //display:none;
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    
+    i{
+        font-size:24px;
+    }
+    
+    
+}
+
+
 .input-icon{
     position:relative;
     
@@ -223,9 +239,23 @@ body{
 
 
 //START OF SAVER ITEMS
-
 .saver-outerBody{
     margin-bottom:32px;
+}
+
+.s_viewType{
+    h4{
+       margin:0px; 
+        
+    }
+    span{
+        font-size:12px;
+    }
+}
+
+//Remove default margin on BS 4
+.hr-noPad{
+    margin-bottom:0px;
 }
 
 

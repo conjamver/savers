@@ -60,6 +60,15 @@
         }else if($filterBy == "LE"){
              $orderByVal = "savers.saver_date DESC";
             $orderByTxt = "Last Edited";
+        }
+        else if($filterBy == "HI"){
+            $orderByVal = "s_intTotal DESC";
+            $orderByTxt = "Highest Rate";
+        }
+        else if($filterBy == "LI"){
+            $orderByVal = "s_intTotal ASC";
+            $orderByTxt = "Lowest Rate";
+            
         }else{
             //Default to this value if user does something fishy in URL
              $orderByVal = "s_rank.rank_id ASC";   
@@ -70,16 +79,20 @@
     
     if(isset($_GET['ex_ctier'])){
         
-        $excludeTxt = $excludeTxt . " AND s_rank.rank_id < 5 ";
+        $excludeTxt = $excludeTxt . " AND s_rank.rank_id < 4 ";
     }
-    if(isset($_GET['ex_intro'])){
-        //$excludeTxt = $excludeTxt . " AND savers.rank_id < 4 ";
+    if(isset($_GET['ex_honey'])){
+        $excludeTxt = $excludeTxt . " AND savers.s_hmoon = 0 ";
     }
           
     
     
            //Create SQL string for getting saving account data
-            $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, s_rank.rank, s_rank.rank_color FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1" . $excludeTxt . "ORDER BY " . $orderByVal;
+
+          //  $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, s_rank.rank, s_rank.rank_color FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1" . $excludeTxt . "ORDER BY " . $orderByVal;
+
+            $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, savers.s_hmoon, savers.max_bal, s_rank.rank, s_rank.rank_color, (savers.v_rate + savers.b_rate) AS s_intTotal FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1 ". $excludeTxt . "ORDER BY " . $orderByVal;
+
                     
             // Run Query
             $result = mysqli_query($conn, $sql);
@@ -130,6 +143,7 @@
 <!-- https://www.hostgator.com/blog/top-10-most-popular-design-templates-for-gator-website-builder/ -->
 
 <body>
+    <button class="btn btn-sm btn-primary" id="scrollBut" title="Go to top of page"><i class="far fa-arrow-alt-circle-up"></i></button>
     <?php include 'includes/nav.php'; ?>
     
     <!--Alert Section --> 
@@ -165,7 +179,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-11 text-left">
-                              <strong><i class="far fa-check-circle"></i> Success! </strong><?php echo "Interest rates for $" . $_GET['saveAmount'] . " have been generated below."; ?>
+                              <strong><i class="far fa-check-circle"></i> Success! </strong><?php echo "Interest rates for $" . number_format($_GET['saveAmount'],"0") . " have been generated below."; ?>
                         </div>
                         
                         <div class="col-1 text-right">
@@ -223,6 +237,11 @@
                                 <select class="form-control-sm" id="filterAmount" name="filterBy">
                                     <option value="HT" <?php if(isset($filterBy) && $filterBy=="HT") echo "selected";?>>Highest Tier</option>
                                     <option value="LT" <?php if(isset($filterBy) && $filterBy=="LT") echo "selected";?>>Lowest Tier</option>
+                                    
+                                    <option value="HI" <?php if(isset($filterBy) && $filterBy=="HI") echo "selected";?>>Highest Rate</option>
+                                    
+                                    <option value="LI" <?php if(isset($filterBy) && $filterBy=="LI") echo "selected";?>>Lowest Rate</option>
+                                    
                                     <option value="LE" <?php if(isset($filterBy) && $filterBy=="LE") echo "selected";?>>Last Edited</option>
                                 </select>
 
@@ -233,15 +252,17 @@
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="ex_ctier" value="true" name="ex_ctier" <?php if(isset($_GET['ex_ctier'])) echo "checked"; ?>>
                                     <label class="form-check-label" for="ex_ctier">
-                                        > C Tier only
+                                        B Tier and above
                                     </label>
                                 </div>
                                 
                                 <!--Exclude introductory rate accounts -->
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="ex_intro" value="true" name="ex_intro" <?php if(isset($_GET['ex_intro'])) echo "checked"; ?>>
-                                    <label class="form-check-label" for="ex_intro">
-                                        No introductory rate
+                                    <input class="form-check-input" type="checkbox" id="ex_honey" value="true" name="ex_honey" <?php if(isset($_GET['ex_honey'])) echo "checked"; ?>
+                                           >
+                                   
+                                    <label class="form-check-label" for="ex_honey">
+                                        No honeymoon
                                     </label>
                                 </div>
 
@@ -397,10 +418,32 @@
                                                         }else{
                                                             echo "___";
                                                         }
+                            
+                                                         //Determine if Honey Moon account
+                                                        if($row['s_hmoon'] == true){
+                                                            echo "^";
+                                                        }
+                                                
                                                         
                                                   ?>
                                                     </h4>
-
+                                                    
+                                                    <?php 
+                                                    if(is_null($row["max_bal"])){ ?>
+                                                      <span class="text-secondary">Max balance unknown</span>  
+                                                   
+                                           
+                                                    <?php
+                                                    }else{ ?>
+                                                    
+                                                     <span class="text-secondary">Max balance $<?php echo number_format($row["max_bal"],"0"); ?> </span>   
+                                                    
+                                                    <?php
+                                                    }
+                                                    
+                                                    ?>
+                                                    
+                                                    
 
                                                     <!---END Monthly Interest--->
 
@@ -418,14 +461,44 @@
                                                             echo "___";
                                                         }
  
-                                                  ?>
+                                                        //Determine if Honey Moon account
+                                                        if($row['s_hmoon'] == true){
+                                                            echo "^";
+                                                        }
+                                                            
+                                                        ?>
+                                                        <br>
+                                                          
                                                         </h4>
+                                                        
+                                                        
+                                                                 <?php 
+                                                    if(is_null($row["max_bal"])){ ?>
+                                                      <span class="text-secondary">Max balance unknown</span>  
+                                                   
+                                           
+                                                    <?php
+                                                    }else{ ?>
+                                                    
+                                                     <span class="text-secondary">Max balance $<?php echo number_format($row["max_bal"],"0"); ?> </span>   
+                                                    
+                                                    <?php
+                                                    }
+                                                    
+                                                    ?>
+                                                        
+                                                        
+                                                        
                                                     </div> <!---END Yearly Interest--->
 
                                             </div>
                                             <!---Saving rate controls--->
                                             <div class="row">
+                                                
                                                 <div class="col-md-12 text-center">
+                                                   
+                                                    
+                                                     
                                                     <button class="btn btn-sm btn-outline-primary s_btnMonth active">Month</button>
                                                     <button class="btn btn-sm btn-outline-primary s_btnYear">Year</button>
                                                 </div>
@@ -440,7 +513,7 @@
                                     <!--Start of savings desc -->
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <hr>
+                                            <hr class="hr-noPad">
                                             <strong><i class="far fa-star"></i> Bonus Condition
                                                 <br>
                                                 <small>
@@ -451,65 +524,30 @@
                                         </div>
                                     </div>    
                                     <!--END of of savings desc -->
-                                    <hr>
+                                    <hr class="hr-noPad">
                                     
-                                    <!--Start of savings Pointss -->
+                                    <!--Start of additional notes -->
                                     <div class="row">
                                         <div class="col-md-12">
-                                    <strong>Review</strong>
-                                       <?php 
-                                        //if($row["point_type"] == 1){
-                                          //  echo '<i class="far fa-smile-beam"></i> ';
-                                            //echo $row["point_desc"];
+                                    <strong style="font-size:14px;">
+                                        Additional Notes
+                                        <br>
+                                        <small>   
+                                        <?php 
+                                        if($row['s_hmoon'] == true){
+                                            echo "^ Bonus interest has a honeymoon period.";
+                                        }else{
+                                            echo "N/A";
+                                        }
 
-                                        //Run new query to show points associated with saving account. Only show points that equal to outer loop saver id. 
-                                        $sql_points = "SELECT savers.saver_id, s_points.s_id, s_points.point_type, s_points.point_desc FROM s_points LEFT JOIN savers ON s_points.s_id = savers.saver_id WHERE savers.saver_id = " . $row['saver_id'] . " ORDER BY point_type ASC";
-
-                                        $result_points = mysqli_query($conn,$sql_points);
-
-                                       //echo mysqli_num_rows($result_points);
-
-                                    if (mysqli_num_rows($result_points) > 0) {
-                                    // output data of each row
-                                        while($row_points = mysqli_fetch_assoc($result_points)) { 
-                                    
-                                            
-                                            if($row_points["point_type"] == 1){?>
-                                                
-                                                <div class="s_point_pro">
-                                                <?php
-                                                echo '<i class="far fa-smile-beam"></i> ';
-                                                echo $row_points["point_desc"];
-                                                ?> 
-                                                </div>
-                                                <?php
-                                            }else if($row_points["point_type"] == 2){ ?>
-                                                <div class="s_point_con">
-                                                <?php
-                                                echo '<i class="far fa-frown-open"></i> ';
-                                                echo $row_points["point_desc"];
-                                                ?>
-                                                </div>
-                                                <?php
-                                            }
-                                    
-                                    
-                                    ?>
-                                      
-                                    
-                                          <?php }//END OF while looper for result_points
-
-                                    }else{
-                                        echo "<br>No review.";
-                                    
-                                    }//EMD OF if statement for rows
-
-                                            ?>
+                                        ?>
+                                        </small> 
+                                            </strong>
                                         </div>
                                     </div>
                                     
                                     <!--End of savings Points -->
-                                    <hr>
+                                    <hr class="">
                                     <!--Start of footer -->
                                     <a href="<?php echo $row["bank_url"]; ?>" target="_blank"><i class="fas fa-external-link-alt"></i> Visit Website</a>
                                     <!--End of footer-->
@@ -665,6 +703,7 @@
 <script type="application/javascript" src="js/amtValidate.js"></script>
 <script type="application/javascript" src="js/s_calcView.js"></script>
 <script type="application/javascript" src="js/s_tierView.js"></script>
+<script type="application/javascript" src="js/scrollBut.js"></script>
 
     
 </html>
