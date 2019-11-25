@@ -1,18 +1,22 @@
 $(document).ready(function() {
-    scrollBut = document.getElementById("scrollBut");
     
-    //CODE WRONG
-    document.addEventListener("scroll", function(){ 
-        if(document.body.scrolltop > 100 || document.documentElement.scrolltop > 100){
-            scrollbut.style.display = "block";
+    
+    //Controls the scroll to top function
+    $("#scrollBut").click(function(){
+        $('html, body').animate({scrollTop : 0},400);
+    });
+    
+    
+    //Determine whether to show or hide button
+    $(window).scroll(function(){
+        if($(this).scrollTop() > 40){
+            $("#scrollBut").stop();
+            $("#scrollBut").fadeIn();
             
         }else{
-            scrollBut.style.display = "none";
+            $("#scrollBut").stop();
+            $("#scrollBut").fadeOut();
         }
     });
     
-    scrollbut.addEventListener("scroll", function(){ 
-        alert("test");
-    
-    });
 });

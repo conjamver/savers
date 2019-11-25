@@ -89,7 +89,17 @@ body {
     font-size: 64px;
     color: #6ab04c; }
 
+.itemFade {
+  opacity: 0;
+  transition: 0.25s ease-in; }
+  .itemFade .appear {
+    opacity: 1; }
+
+.saverLinks {
+  font-size: 12px; }
+
 #scrollBut {
+  display: none;
   border-radius: 50%;
   position: fixed;
   /* Fixed/sticky position */
@@ -98,9 +108,15 @@ body {
   right: 30px;
   /* Place the button 30px from the right */
   z-index: 99;
-  /* Make sure it does not overlap */ }
+  /* Make sure it does not overlap */
+  box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.1);
+  padding: 0; }
   #scrollBut i {
-    font-size: 24px; }
+    display: inline-block;
+    font-size: 48px;
+    transition: 0.25s; }
+  #scrollBut i:hover {
+    transform: rotate(360deg); }
 
 .input-icon {
   position: relative; }
@@ -140,13 +156,15 @@ body {
 
 .blog-featured {
   background-color: #fefefe;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 8px 8px 2px rgba(0, 0, 0, 0.1);
   min-height: 100%;
   transition: 0.25;
   border-radius: 8px;
   filter: brightness(100%); }
   .blog-featured .blog-featuredContent h3, .blog-featured .blog-featuredContent h5 {
     display: inline; }
+  .blog-featured .itemFade {
+    opacity: 0; }
   .blog-featured .badge {
     color: white;
     width: 100%; }

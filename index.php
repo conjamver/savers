@@ -549,7 +549,8 @@
                                     <!--End of savings Points -->
                                     <hr class="">
                                     <!--Start of footer -->
-                                    <a href="<?php echo $row["bank_url"]; ?>" target="_blank"><i class="fas fa-external-link-alt"></i> Visit Website</a>
+                                    <a class="saverLinks" href="<?php echo $row["bank_url"]; ?>" target="_blank"><i class="fas fa-external-link-alt"></i> Visit website</a>
+                                    
                                     <!--End of footer-->
                                     
                                 </div>
@@ -704,6 +705,7 @@
 <script type="application/javascript" src="js/s_calcView.js"></script>
 <script type="application/javascript" src="js/s_tierView.js"></script>
 <script type="application/javascript" src="js/scrollBut.js"></script>
+
 
     
 </html>
