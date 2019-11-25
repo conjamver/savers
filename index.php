@@ -250,18 +250,19 @@
                                
                                 <!--Exclude lower than ctier -->
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="ex_ctier" value="true" name="ex_ctier" <?php if(isset($_GET['ex_ctier'])) echo "checked"; ?>>
-                                    <label class="form-check-label" for="ex_ctier">
+                                    <input class="form-check-input  " type="checkbox" id="ex_ctier" value="true" name="ex_ctier" <?php if(isset($_GET['ex_ctier'])) echo "checked"; ?>>
+                                    <span class="chkSort"></span>
+                                    <label class="form-check-label " for="ex_ctier">
                                         B Tier and above
                                     </label>
                                 </div>
                                 
                                 <!--Exclude introductory rate accounts -->
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="ex_honey" value="true" name="ex_honey" <?php if(isset($_GET['ex_honey'])) echo "checked"; ?>
+                                <div class="form-check form-check-inline ">
+                                    <input class="form-check-input "  type="checkbox" id="ex_honey" value="true" name="ex_honey" <?php if(isset($_GET['ex_honey'])) echo "checked"; ?>
                                            >
                                    
-                                    <label class="form-check-label" for="ex_honey">
+                                    <label class="form-check-label " for="ex_honey">
                                         No honeymoon
                                     </label>
                                 </div>

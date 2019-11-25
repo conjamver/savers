@@ -107,7 +107,8 @@ body{
         background-color:$red;
         
     }
-
+    
+    
     
 }
 
@@ -140,10 +141,30 @@ body{
     margin:4px 0;
 }
 
+//Elements within the sort section
 #saveFilters{
     display: flex;
     flex-flow: row wrap;
     align-items: center;
+    
+    select{
+        cursor:pointer;
+    }
+    
+    input[type=checkbox]{
+        cursor:pointer;
+        //opacity:0;
+      //  position:absolute;
+      //  height: 0;
+      //  width: 0;
+        
+    }
+    
+
+    
+    label{
+        cursor:pointer;
+    }
     
     
     .form-check{
@@ -162,6 +183,10 @@ body{
     }
     
 }
+
+//END OF SORT SECTION
+
+
 
 
 .home-body{

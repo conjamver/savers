@@ -69,6 +69,12 @@ body {
   display: flex;
   flex-flow: row wrap;
   align-items: center; }
+  #saveFilters select {
+    cursor: pointer; }
+  #saveFilters input[type=checkbox] {
+    cursor: pointer; }
+  #saveFilters label {
+    cursor: pointer; }
   #saveFilters .form-check {
     margin-left: 20px; }
   #saveFilters #filterAmount {
