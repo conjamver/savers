@@ -62,6 +62,9 @@ body {
     font-weight: bold;
     padding-left: 20px; }
 
+#disclaimer {
+  font-size: 12px; }
+
 #saveFiltersOuter {
   margin: 4px 0; }
 
