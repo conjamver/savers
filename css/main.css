@@ -218,7 +218,8 @@ body {
 
 #about {
   padding: 16px 0;
-  min-height: 100%; }
+  min-height: 100%;
+  font-size: 18px; }
 
 .about-container {
   border: 2px solid #6ab04c;

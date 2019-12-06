@@ -40,10 +40,14 @@
                         <h2>
                             About us
                         </h2>
-                        <p>Dosh Alley is a free website that provides that provides a Saving Account comparison application as well as additional content on securing your finances. 
+                        <p>Dosh Alley is a free website that provides a Savingw Account comparison application and addtional content such as articles to help secure your fiancial future.
                             </p>
 
-<p>It was started by a young individual name Connor, who has always been passionate about web programming and eventually delved into the world of Australian finance. </p>
+<p>It was started by a young individual name Connor, a passionate web programmer who eventually delved into the world of Australian finance. 
+                        </p>
+    <p>
+    The biggest influences for Dosh Alley was The Barefoot Investor, an Australian money guide book that was easy to understand. Connor eventually learnt the importance of good money behaviours created thus Dosh Alley was born.</p>
+
 
                        
 
@@ -67,9 +71,9 @@
                     </div>
                     <div class ="col-md-6">
                         <h2>Our mission</h2>
-                        <p>We believe that every aussie deserves to make the most out of their finances. Our savings account comparison application is our first step for helping  Aussies maximising their returns. </p>
+                        <p>We believe that every aussie deserves to make the most out of their finances. Our savings account comparison application is our first step for helping  Aussies maximise their returns. </p>
                             
-                            <p>We also aim to deliver information in a way that is easily understandable to people who may know absolutely nothing about finance. We understand that the subject of life is not taught in most Australian education systems. </p>
+                            <p>We also aim to deliver information in a way that is easily understandable to people who may know nothing about finance. We understand that money can be boring to read about online. </p>
                         
                             <p>We ensure all products we review are reliable and trustworthy. We are strong to those values.</p>
                     </div>
