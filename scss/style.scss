@@ -8,11 +8,18 @@ $red: #eb4d4b;
 $secondary: #3d3d3d;
 
 
-$h_font: 'Noticia Text', serif;
+//$h_font: 'Noticia Text', serif;
+$h_font: 'Lato', sans-serif;
+$body_font: 'Roboto', sans-serif;
 
 
 html,body{
     height:100%;
+    font-family: $body_font;
+    h1{
+        font-family: $h_font;
+        
+    }
 }
 
 body{
@@ -416,7 +423,7 @@ body{
 ////ABOUT SECTION
 
 #about{
-    padding:16px 0;
+    
     min-height: 100%;
     font-size:18px;
 }
@@ -429,6 +436,35 @@ body{
   
     
 }
+
+.sectionBody{
+    padding:16px 0;
+    
+}
+
+.contPad{
+    padding:16px 0;
+}
+
+#saverTiers{
+    font-size:18px;
+}
+
+.benefitCont{
+    border: solid 2px green;
+    border-radius:8px;
+    min-height:100%;
+    padding:16px;
+    
+    i{
+        font-size:48px;
+    }
+    p{
+        font-size:18px;
+    }
+    
+}
+
 
 ////END ABOUT SECTION
 

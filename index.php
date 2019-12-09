@@ -213,7 +213,8 @@
                     </div>
                     <div class="col-md-8">
                         <!--|||Start Search Bar||| -->
-                        <h1 class="text-center">Current Savings Amount</h1>
+                        <h1 class="text-center">Welcome to Dosh Alley</h1>
+                        <h3>Enter savings amount:</h3>
                         
                         <form method="GET" class="" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?'. http_build_query($_GET);?>">
                                   
@@ -596,7 +597,7 @@
         <!--END OF SAVER BAR BOTTOM --> 
         
         <!--====START Saver tier legend dashboard ====--> 
-        <section id="saverTiers">
+        <section id="saverTiers" class="sectionBody">
             
         <!--Header --> 
           <div class="container">
@@ -665,34 +666,20 @@
         <!--====END Saver tier legend dashboard ====--> 
         
         
-        <section id="about">
-            <!--START About section -->
+        <section id="" class="sectionBody">
+            <!--START Contact US section-->
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h1>Advantages of Savers</h1>
+                        <h1>Contact Us</h1>
                         <hr>
+                        <h3>It is incredibly important to hear feedback from you. We endeavour to provide the most accurate services.</h3>
+                        <button class="btn btn-lg btn-primary">Contact us!</button>
                     </div>
                 </div>
                
     
-                 <div class="row">
-                    <div class="col-md-6 text-center">
-                        <div class="about-container">
-                        <i class="fas fa-laptop"></i>
-                        <h3>Usability</h3>
-                        <p>Savers compacts insights into flash card sized reports so that users can compare accounts with ease. This ensures you can find your best savings account in the fastest way possible. </p>
-                    </div>
-                    </div> 
-                    <div class="col-md-6 text-center">
-                        <div class="about-container">
-                        <i class="fas fa-laptop"></i>
-                        <h3>Speed</h3>
-                        <p>Your monthly interest one click away.  </p>
-                    </div>
-                     </div>
-                </div>
-        </div>
+            </div>
         </section>
         
         

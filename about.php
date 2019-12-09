@@ -21,7 +21,7 @@
 
     <div id="main">
         <!--Welcome Banner -->
-        <section id="abt-banner">
+        <section id="abt-banner" class="">
             <div class="container">
                 <div class = "row">
                     <div class="col-md-12">
@@ -33,8 +33,8 @@
         </section>
         
         <!--About Section --->
-        <section id="about">
-            <div class="container">
+        <section id="about" class="sectionBody">
+            <div class="container sectionBody">
                 <div class="row">
                     <div class="col-md-6">
                         <h2>
@@ -63,7 +63,7 @@
             </div>
             
             <!--Our Mission Section --->
-            <div class="container">
+            <div class="container sectionBody">
                 <div class="row">
                     
                     <div class ="col-md-6">
@@ -80,8 +80,43 @@
                 </div>
             </div>
         </section>
-
-
+        
+        <!--Benefits--->
+        <section class="sectionBody">
+            <div class="container">
+                  <div class="row">
+                   
+                    <div class ="col-md-12 text-center">
+                        <h2>Why choose Dosh Alley?</h2>
+                        <hr>
+                       
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container">
+                  <div class="row">
+                   
+                    <div class ="col-md-6 text-center">
+                        <div class="benefitCont">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <h3>We are user friendly</h3>
+                        <p>Our savings comparrison application is optimised to provide the best interest rates in the most efficient way possible.   </p>
+                        </div>
+                    </div>
+                      <div class ="col-md-6 text-center">
+                          <div class="benefitCont">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h3>Our users come first</h3>
+                          <p>We pride ourselves in providing the most accurate fiancial information. All sources are researched and only published if our users can make or save money.</p>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        
 
 
 

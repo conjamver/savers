@@ -1,5 +1,8 @@
 html, body {
-  height: 100%; }
+  height: 100%;
+  font-family: "Roboto", sans-serif; }
+  html h1, body h1 {
+    font-family: "Lato", sans-serif; }
 
 body {
   padding-top: 54px; }
@@ -38,7 +41,7 @@ body {
   display: flex;
   align-items: center; }
   #home-banner h1 {
-    font-family: "Noticia Text", serif;
+    font-family: "Lato", sans-serif;
     color: #badc58; }
   #home-banner h3 {
     color: #6ab04c; }
@@ -217,7 +220,6 @@ body {
   background-color: #f39c12; }
 
 #about {
-  padding: 16px 0;
   min-height: 100%;
   font-size: 18px; }
 
@@ -225,6 +227,25 @@ body {
   border: 2px solid #6ab04c;
   border-radius: 8px;
   padding: 16px; }
+
+.sectionBody {
+  padding: 16px 0; }
+
+.contPad {
+  padding: 16px 0; }
+
+#saverTiers {
+  font-size: 18px; }
+
+.benefitCont {
+  border: solid 2px green;
+  border-radius: 8px;
+  min-height: 100%;
+  padding: 16px; }
+  .benefitCont i {
+    font-size: 48px; }
+  .benefitCont p {
+    font-size: 18px; }
 
 #abt-banner {
   background-size: 100% 100vh;
@@ -237,7 +258,7 @@ body {
   display: flex;
   align-items: center; }
   #abt-banner h1 {
-    font-family: "Noticia Text", serif;
+    font-family: "Lato", sans-serif;
     color: #badc58; }
   #abt-banner img {
     max-height: 200px; }
@@ -248,7 +269,7 @@ nav img {
   max-height: 25px; }
 
 #nav-logo {
-  font-family: "Noticia Text", serif;
+  font-family: "Lato", sans-serif;
   color: #badc58; }
 
 footer {
@@ -256,7 +277,7 @@ footer {
   background: #343a40;
   padding: 10px 0px; }
   footer h5 {
-    font-family: "Noticia Text", serif;
+    font-family: "Lato", sans-serif;
     color: #badc58;
     display: inline-block; }
   footer img {
