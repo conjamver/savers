@@ -451,13 +451,22 @@ body{
 }
 
 .benefitCont{
-    border: solid 2px green;
+    border: solid 2px $d-primary;
     border-radius:8px;
     min-height:100%;
-    padding:16px;
+    padding:24px;
     
     i{
-        font-size:48px;
+        font-size:42px;
+        color: $l-white;
+        display: inline-block;
+        border-radius: 50%;
+        box-shadow: 0px 0px 2px #888;
+        padding: 0.6em 0.6em;
+        margin:8px;
+       
+        background-color:$d-primary;
+        
     }
     p{
         font-size:18px;
@@ -467,6 +476,21 @@ body{
 
 
 ////END ABOUT SECTION
+
+
+//contact Form
+
+#contact-form{
+    font-size:18px;
+}
+
+
+
+
+/////END CONTACT FORM
+
+
+
 
 ////ABOUT US PAGE DECEMBER 2019
 

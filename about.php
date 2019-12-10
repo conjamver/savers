@@ -101,7 +101,7 @@
                         <div class="benefitCont">
                         <i class="fas fa-tachometer-alt"></i>
                         <h3>We are user friendly</h3>
-                        <p>Our savings comparrison application is optimised to provide the best interest rates in the most efficient way possible.   </p>
+                        <p>Our savings comparrison application is optimised to provide the best interest rates in the most efficient way possible. We reguarly maintain this service.</p>
                         </div>
                     </div>
                       <div class ="col-md-6 text-center">
@@ -109,6 +109,8 @@
                         <i class="fas fa-chalkboard-teacher"></i>
                         <h3>Our users come first</h3>
                           <p>We pride ourselves in providing the most accurate fiancial information. All sources are researched and only published if our users can make or save money.</p>
+                              
+                              
                         </div>
                        
                     </div>
