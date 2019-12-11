@@ -40,13 +40,13 @@
                         <h2>
                             About us
                         </h2>
-                        <p>Dosh Alley is a free website that provides a Savingw Account comparison application and addtional content such as articles to help secure your fiancial future.
+                        <p>Dosh Alley is a free website that provides a Savings Account comparison application and addtional content such as articles to help secure your fiancial future.
                             </p>
 
 <p>It was started by a young individual name Connor, a passionate web programmer who eventually delved into the world of Australian finance. 
                         </p>
     <p>
-    The biggest influences for Dosh Alley was The Barefoot Investor, an Australian money guide book that was easy to understand. Connor eventually learnt the importance of good money behaviours created thus Dosh Alley was born.</p>
+    The biggest influences for Dosh Alley was The Barefoot Investor, an Australian money guide that was easy to understand. Connor eventually learnt the importance of good money behaviours and thus Dosh Alley was born.</p>
 
 
                        

@@ -674,7 +674,7 @@
                         <h1>Contact Us</h1>
                         <hr>
                         <h3>It is incredibly important to hear feedback from you. We endeavour to provide the most accurate services.</h3>
-                        <button class="btn btn-lg btn-primary">Contact us!</button>
+                        <a href="contact.php"><button class="btn btn-lg btn-primary">Contact us!</button></a>
                     </div>
                 </div>
                

@@ -10,7 +10,32 @@
     
     
     <?php
+    
+        
+    //Generate Error Message.
+    if(isset($_GET['contact'])){
+        switch($_GET['contact']){
+            case "empty":
+                $errMsg = "You have one or more empty fields in contact form.";
+                break;
+            case "invalidEmail":
+                $errMsg = "Email entered is a invalid format.";
+                break;
+                
+            case "invalidName":
+                $errMsg = "Name entered is a invalid format.";
+                break;
+                
+            case "invalidMessage":
+                $errMsg = "Message entered must be less than 500 characters.";
+                break;
+    
+        }
+    }
+        
+    
     if(isset($_POST['c_submit'])){
+        $errMsg = "";
         $c_name = cleanData($_POST['c_name']);
         $c_email = cleanData($_POST['c_email']);
         $c_subject = cleanData($_POST['c_subject']);
@@ -19,6 +44,44 @@
         ////Check length backend and data on here. Make sure email correct.
         ///
         
+        //Check for any empty fields
+        if(empty($c_name) || empty($c_email) || empty($c_subject) || empty($c_message)){
+            header("Location: contact.php?contact=empty&c_name=$c_name&c_email=$c_email&c_subject=$c_subject&c_message=$c_message");
+        }
+        else{
+            
+            //name validation
+             if(strlen($c_name) >32 || strlen($c_name) < 1 || ctype_alpha($c_name) == false){
+            header("Location: contact.php?contact=invalidName&c_name=$c_name&c_email=$c_email&c_subject=$c_subject&c_message=$c_message");
+         }
+            
+            //email validation
+            elseif(!filter_var($email, FILTER_VALIDATE_EMAIL ) || strlen($c_email) >64 || strlen($c_email) < 1){
+               header("Location: contact.php?contact=invalidEmail&c_name=$c_name&c_email=$c_email&c_subject=$c_subject&c_message=$c_message");
+            }
+            
+            
+            //Message Validation
+            elseif(strlen($c_message) >500 || strlen($c_message) < 1){
+                header("Location: contact.php?contact=invalidMessage&c_name=$c_name&c_email=$c_email&c_subject=$c_subject&c_message=$c_message");
+            }
+            
+            
+            
+            
+            
+        }//End of else statement
+        
+        
+     
+        }
+        
+        
+        
+       // if(strlen($c_name) < 33 && strlen($c_name) > 0){
+            
+      //  }
+        
         
         //Run email function if validation meets
         
@@ -26,7 +89,7 @@
         //Run SQL and store the queries...
         // -> prepare statements.
         
-    }
+    
     
     ?>
 
@@ -41,6 +104,40 @@
 
 
     <div id="main">
+        
+        <!--Error message generator-->
+        <?php
+        if (isset($_GET['contact'])){
+        //Display error Message message
+        ?>
+    <div id="alertContainer" class="alert alertErr">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-11 text-left">
+                              <strong><i class="fas fa-exclamation-circle"></i> Error: </strong><?php echo $errMsg; ?>
+                        </div>
+                        
+                        <div class="col-1 text-right">
+                             <!--Exit alert button --> 
+                            <span class="alertExit">
+                                <i class="far fa-times-circle"></i>
+                            </span>
+                        </div>
+                        
+                    </div>
+                     
+                   
+    
+                </div>
+            </div> 
+        
+        
+        
+   <?php }
+    ?>
+        
+        
+        
         <!--Banner -->
         <section id="abt-banner" class="">
             <div class="container">
@@ -58,20 +155,24 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h2>Contact Dosh Alley</h2>
+                        <p>All fields must be filled for your query to be sent to us.</p>
+                        <hr>
 
                         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 
                             <!--Name section--->
                             <div class="form-group">
                                 <label for="c_name">Name:</label>
-                                <input name="c_name" type="text" class="form-control" placeholder="Enter name" id="c_email" maxlength="32">
+                                <input name="c_name" type="text" class="form-control" placeholder="Enter name" id="c_email" maxlength="32" value="<?php if(isset($_GET['c_name'])) echo $_GET['c_name']; ?>">
+                                
+                               
                             </div>
 
 
                             <!--Email Section --->
                             <div class="form-group">
                                 <label for="c_email">Email address:</label>
-                                <input name="c_email" type="c_email" class="form-control" placeholder="Enter email" id="c_email" maxlength="64">
+                                <input name="c_email" type="c_email" class="form-control" placeholder="Enter email" id="c_email" maxlength="64" value="<?php if(isset($_GET['c_email'])) echo $_GET['c_email']; ?>">
                             </div>
 
 
@@ -91,8 +192,8 @@
                             <!--Topic Section --->
                             <div class="form-group">
                                 <label for="c_message">Your message:</label>
-                                <textarea name="c_message" rows="6" class="form-control" maxlength="500" placeholder="Enter your message here. Maximum 500 words."></textarea>
-                                <span>Words left: #</span>
+                                <textarea id="c_message" name="c_message" rows="6" class="form-control" maxlength="500" placeholder="Enter your message here. Maximum 500 words."><?php if(isset($_GET['c_message'])) echo $_GET['c_message']; ?></textarea>
+                                <span>Words left: </span><span id="word-counter"></span>
                             </div>
                             
                             
@@ -116,4 +217,6 @@
 
 </body>
 <script type="application/javascript" src="js/scrollBut.js"></script>
+<script type="application/javascript" src="js/closeAlert.js"></script>
+    <script type="application/javascript" src="js/textCount.js"></script>
 </html>
