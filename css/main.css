@@ -219,6 +219,11 @@ body {
 .tier-c {
   background-color: #f39c12; }
 
+#saverTiers {
+  font-size: 18px;
+  background-color: #8e44ad;
+  color: #fefefe; }
+
 #about {
   min-height: 100%;
   font-size: 18px; }
@@ -233,9 +238,6 @@ body {
 
 .contPad {
   padding: 16px 0; }
-
-#saverTiers {
-  font-size: 18px; }
 
 .benefitCont {
   border: solid 2px #6ab04c;

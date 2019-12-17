@@ -608,7 +608,7 @@
                     </div>
                 </div>
             </div>
-            
+     
             
             <div class="container">
                 <div class="row">
@@ -627,13 +627,13 @@
                         </div> 
                     </div>
                     <div class="col-md-6 text-left">
-                        <div class="tierView">
+                        <div id="tview-s" class="tierView">
                             <h2>S TIER</h2>
                             <p>S Tier will ensure maximum savings with great interest rates that are easy to achieve. This rank also has unique features to aid saving such as custom round ups, fee free ATMs and user friendly saving reports.
                             
                             <p>No. of S Tier Accounts: xxxx</p>
                         </div>
-                        <div class="tierView">
+                        <div id="tview-a" class="tierView inactive">
                             <h2>A TIER</h2>
                             <p>Fee free accounts that have balanced rates</p>
                             <ul>
@@ -642,12 +642,12 @@
                                 
                             </ul>
                         </div>
-                        <div class="tierView">
+                        <div id="tview-b" class="tierView inactive">
                             <h2>B TIER</h2>
                             <p>These fee free saving accounts feature generous interest rates where the bonus can be achieved easily. These accounts will have poor variable rates if bonuses are not met. </p>
                             
                         </div>
-                        <div class="tierView">
+                        <div id="tview-c" class="tierView inactive">
                             <h2>C TIER and below</h2>
                             <p>For long term saving, it is advised to seek better options. Any saving accounts with monthly fees, rough penalties and a poor variables rate are characteristics to avoid.</p>
                             

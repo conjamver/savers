@@ -10,7 +10,8 @@
     
     
     <?php
-    
+    //Declare variables
+    $errCount = 0;
         
     //Generate Error Message.
     if(isset($_GET['contact'])){
@@ -29,6 +30,14 @@
             case "invalidMessage":
                 $errMsg = "Message entered must be less than 500 characters.";
                 break;
+                
+            case "invalidSubject":
+                $errMsg = "Topic is invalid. Please ensure topic selected from drop down.";
+                break;
+                
+            case "sent":
+                $errMsg = "Your message has been sent. We will contact you as soon as we can.";
+                break;
     
         }
     }
@@ -46,50 +55,65 @@
         
         //Check for any empty fields
         if(empty($c_name) || empty($c_email) || empty($c_subject) || empty($c_message)){
-            header("Location: contact.php?contact=empty&c_name=$c_name&c_email=$c_email&c_subject=$c_subject&c_message=$c_message");
+            header("Location: contact.php?contact=empty&c_name=$c_name&c_email=$c_email&c_subject=$c_subject");
+            
+            exit();
         }
         else{
             
-            //name validation
-             if(strlen($c_name) >32 || strlen($c_name) < 1 || ctype_alpha($c_name) == false){
-            header("Location: contact.php?contact=invalidName&c_name=$c_name&c_email=$c_email&c_subject=$c_subject&c_message=$c_message");
-         }
+                //name validation
+                 if(strlen($c_name) >32 || strlen($c_name) < 1 || ctype_alpha($c_name) == false){
+                header("Location: contact.php?contact=invalidName&c_name=$c_name&c_email=$c_email&c_subject=$c_subject");
+                     exit();
+             }
+
+                //email validation
+                elseif(!filter_var($c_email, FILTER_VALIDATE_EMAIL ) || strlen($c_email) >64 || strlen($c_email) < 1){
+                   header("Location: contact.php?contact=invalidEmail&c_name=$c_name&c_email=$c_email&c_subject=$c_subject");
+                    
+                    exit();
+                }
+
+
+                //Message Validation
+                elseif(strlen($c_message) >500 || strlen($c_message) < 1){
+                    header("Location: contact.php?contact=invalidMessage&c_name=$c_name&c_email=$c_email&c_subject=$c_subject");
+                    exit();
+
+                }
+
+                //Select box limitation *Stops html manipulation
+                  elseif(strlen($c_subject) >48 || strlen($c_subject) < 1){
+                    header("Location: contact.php?contact=invalidSubject&c_name=$c_name&c_email=$c_email&c_subject=$c_subject");
+                      exit();
+
+                }
             
-            //email validation
-            elseif(!filter_var($email, FILTER_VALIDATE_EMAIL ) || strlen($c_email) >64 || strlen($c_email) < 1){
-               header("Location: contact.php?contact=invalidEmail&c_name=$c_name&c_email=$c_email&c_subject=$c_subject&c_message=$c_message");
-            }
-            
-            
-            //Message Validation
-            elseif(strlen($c_message) >500 || strlen($c_message) < 1){
-                header("Location: contact.php?contact=invalidMessage&c_name=$c_name&c_email=$c_email&c_subject=$c_subject&c_message=$c_message");
-            }
-            
-            
-            
-            
-            
-        }//End of else statement
+
+            }//End of else statement
         
         
-     
-        }
+        //GENERATE THE EMAIL
+        $mailTo = "connor.j.vernon97@gmail.com";
+        $headers = "From: " . $c_email;
+        $txt = "You have recieved a email from: " .$c_name."\n\n".$c_message;
         
+        mail($mailTo, $subject, $txt,$headers);
         
+       header("Location: contact.php?contact=sent"); 
+
+        }//END of FORM CONDITIONS
         
-       // if(strlen($c_name) < 33 && strlen($c_name) > 0){
-            
-      //  }
-        
-        
+    
         //Run email function if validation meets
-        
+    
+    
+         
         
         //Run SQL and store the queries...
         // -> prepare statements.
         
-    
+  
     
     ?>
 
@@ -108,6 +132,7 @@
         <!--Error message generator-->
         <?php
         if (isset($_GET['contact'])){
+            if($_GET['contact'] != "sent"){
         //Display error Message message
         ?>
     <div id="alertContainer" class="alert alertErr">
@@ -133,7 +158,41 @@
         
         
         
-   <?php }
+   <?php 
+        }//end of error message html
+        else{  
+        
+        ?>
+            
+        <div id="alertContainer" class="alert alertSuccess">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-11 text-left">
+                              <strong><i class="far fa-check-circle"></i> Success! </strong><?php echo $errMsg; ?>
+                        </div>
+                        
+                        <div class="col-1 text-right">
+                             <!--Exit alert button --> 
+                            <span class="alertExit">
+                                <i class="far fa-times-circle"></i>
+                            </span>
+                        </div>
+                        
+                    </div>
+                     
+                   
+    
+                </div>
+            </div> 
+        
+        
+        
+        
+        <?php 
+             }
+        
+        
+        }//End of checking contact variable set
     ?>
         
         
@@ -183,6 +242,7 @@
                                     <option>General Enquiry</option>
                                     <option>Bugs and errors related to Dosh Alley</option>
                                     <option>Ideas for Dosh Alley</option>
+                                    
                                 </select>
                             </div>
                             

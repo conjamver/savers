@@ -416,6 +416,14 @@ body{
 
 
 
+#saverTiers{
+    font-size:18px;
+    background-color:#8e44ad;
+    color:$l_white;
+}
+
+
+
 //END Saver tier legend
 
 
@@ -446,9 +454,7 @@ body{
     padding:16px 0;
 }
 
-#saverTiers{
-    font-size:18px;
-}
+
 
 .benefitCont{
     border: solid 2px $d-primary;
