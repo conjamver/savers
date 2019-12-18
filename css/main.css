@@ -205,7 +205,8 @@ body {
 
 .tierSelector:hover {
   cursor: pointer;
-  background-color: black; }
+  opacity: 0.6;
+  transition: 0.25s; }
 
 .tier-s {
   background-color: #8e44ad; }
@@ -218,6 +219,9 @@ body {
 
 .tier-c {
   background-color: #f39c12; }
+
+.t-active {
+  border: 2px solid #fefefe; }
 
 #saverTiers {
   font-size: 18px;

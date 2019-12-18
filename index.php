@@ -613,7 +613,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-center">
-                        <div class="tierSelector tier-s" style="">
+                        <div class="tierSelector tier-s t-active" style="">
                             <h2>S Tier</h2>
                         </div>
                         <div class="tierSelector tier-a" style="">
