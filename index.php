@@ -92,6 +92,11 @@
           //  $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, s_rank.rank, s_rank.rank_color FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1" . $excludeTxt . "ORDER BY " . $orderByVal;
 
             $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, savers.s_hmoon, savers.max_bal, s_rank.rank, s_rank.rank_color, (savers.v_rate + savers.b_rate) AS s_intTotal FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1 ". $excludeTxt . "ORDER BY " . $orderByVal;
+    
+    
+                          
+            //Master SQL string for statistics
+            $master_stat_sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.v_rate, savers.b_rate, savers.s_hmoon, savers.max_bal, s_rank.rank, s_rank.rank_color, s_rank.rank_id, (savers.v_rate + savers.b_rate) AS s_intTotal FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1";
 
                     
             // Run Query
@@ -631,7 +636,89 @@
                             <h2>S TIER</h2>
                             <p>S Tier will ensure maximum savings with great interest rates that are easy to achieve. This rank also has unique features to aid saving such as custom round ups, fee free ATMs and user friendly saving reports.
                             
-                            <p>No. of S Tier Accounts: xxxx</p>
+                         
+                            
+                            <!--Tier stats/information --->
+                            <div class="row">
+                                
+                                 <!--NO. OF ACCOUNTS --->
+                                <div class = "col-3">
+                                    <div class="tier-stat-cont text-center">
+                                                <?php 
+                                                
+                                                //What rank to look for
+                                                $stat_rank = " AND s_rank.rank_id = 1";
+                                                
+                                                //Join the strings together
+                                                $stat_sql = $master_stat_sql . $stat_rank;
+
+                    
+                                                // Run Query
+                                                $stat_result = mysqli_query($conn, $stat_sql);
+                                        
+                                     
+                                                
+                                                ?>
+                                        <i class="fas fa-piggy-bank"></i>
+                                        <br>
+                                        <span>
+                                            <strong>
+                                                  <?php
+                                                echo mysqli_num_rows($stat_result);
+                                            
+                                            ?>
+                                           </strong>
+                                            <br>
+                                            <small>
+                                                No. of Savers
+                                            </small>
+                                        </span>
+                                    
+                                    </div>
+                                
+                                </div>
+                                <!--END OF NO. OF ACCOUNTS --->
+                                
+                                
+                                 <!--AVERAGE INTEREST --->
+                                <div class = "col-3">
+                                    <div class="tier-stat-cont text-center">
+                                        <i class="fas fa-chart-line"></i>
+                                        <br>
+                                        <span>
+                                          <?php
+                                            //CALCULATE THE AVERAGE INTEREST
+                                            $s_average = 0;
+                                            while($row = mysqli_fetch_assoc($stat_result)) { 
+                       
+                                                $s_average = $s_average + ($row["v_rate"] + $row["b_rate"]);
+                                                
+                                            }
+                                          
+                                            echo $s_average / mysqli_num_rows($stat_result);
+                                            
+                                               //END OF CALCULATE THE AVERAGE INTEREST
+                                            ?>
+                                            
+                                            <br>
+                                            <small>
+                                                Avg. Interest
+                                            </small>
+                                        </span>
+                                    
+                                    </div>
+                                
+                                </div>
+                                <!--END OF AVERAGE INTEREST --->
+                            
+                            
+                            </div>
+                            
+                            
+                             <!--END OF Tier stats/information --->
+                            
+                            
+                            
                         </div>
                         <div id="tview-a" class="tierView inactive">
                             <h2>A TIER</h2>

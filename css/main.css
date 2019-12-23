@@ -228,6 +228,13 @@ body {
   background-color: #8e44ad;
   color: #fefefe; }
 
+.tier-stat-cont {
+  border: 2px solid #fefefe;
+  border-radius: 4px; }
+  .tier-stat-cont i {
+    font-size: 32px;
+    padding: 12px; }
+
 #about {
   min-height: 100%;
   font-size: 18px; }
@@ -238,7 +245,7 @@ body {
   padding: 16px; }
 
 .sectionBody {
-  padding: 16px 0; }
+  padding: 24px 0; }
 
 .contPad {
   padding: 16px 0; }
