@@ -91,7 +91,7 @@
 
           //  $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, s_rank.rank, s_rank.rank_color FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1" . $excludeTxt . "ORDER BY " . $orderByVal;
 
-            $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, savers.s_hmoon, savers.max_bal, s_rank.rank, s_rank.rank_color, (savers.v_rate + savers.b_rate) AS s_intTotal FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1 ". $excludeTxt . "ORDER BY " . $orderByVal;
+            $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, savers.s_hmoon, savers.max_bal, s_rank.rank, s_rank.rank_color, s_rank.rank_id, (savers.v_rate + savers.b_rate) AS s_intTotal FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1 ". $excludeTxt . "ORDER BY " . $orderByVal;
     
     
                           
@@ -340,11 +340,25 @@
                                              <div class="col-md-12">
                                             <span class="badge" style="background-color:<?php echo $row['rank_color']; ?>">
                                                 <?php 
-                                                        //Display Rank
-                                                        echo $row["rank"];
-                                                        if ($row["rank"] != "TBA"){
-                                                           echo " Tier"; 
+                                                        //Display Rank information
+                                                        
+                            
+                                                       
+                                                        
+                                                        if($row["rank_id"] <= 4){
+                                                            echo $row["rank"];
+                                                            if ($row["rank"] != "TBA"){
+                                                               echo " Tier"; 
+                                                            } 
+                                                        }else{
+                                                            echo "C";
+                                                            if ($row["rank"] != "TBA"){
+                                                               echo " Tier"; 
+                                                            } 
                                                         }
+                            
+                            
+                                                        //END OF RANK INFORMATION
 
                                                     ?>
 
@@ -463,7 +477,17 @@
                                                             <?php 
                                                         //Only print if value is numeric and value is set.
                                                         if (isset($saveAmount) && is_numeric($saveAmount)){
-                                                              echo "$" . number_format($saveAmount * (($row["v_rate"] + $row["b_rate"]) / 100),"2"); 
+                                                              
+                                                            //OLD FORMULA, Basic yearly int calc
+                                                            echo "$" . number_format($saveAmount * (($row["v_rate"] + $row["b_rate"]) / 100),"2"); 
+                                                                
+                                                        /* COMPOUND YEAR FORMULA
+                                                            $yearlyC = 0;
+                                                            $yearlyC =  $saveAmount * pow((1 + (($row["v_rate"] + $row["b_rate"])/100)/12),12);
+                                                            
+                                                            echo "$" . number_format($yearlyC - $saveAmount,2);
+                                                            
+                                                            */
                                                         }else{
                                                             echo "___";
                                                         }
@@ -695,7 +719,7 @@
                                                 
                                             }
                                           
-                                            echo $s_average / mysqli_num_rows($stat_result);
+                                             echo number_format($s_average / mysqli_num_rows($stat_result),"2") . "%"
                                             
                                                //END OF CALCULATE THE AVERAGE INTEREST
                                             ?>
@@ -709,12 +733,8 @@
                                     </div>
                                 
                                 </div>
-                                <!--END OF AVERAGE INTEREST --->
-                            
-                            
+                                <!--END OF AVERAGE INTEREST --->                           
                             </div>
-                            
-                            
                              <!--END OF Tier stats/information --->
                             
                             
@@ -725,13 +745,161 @@
                             <p>Fee free accounts that have balanced rates</p>
                             <ul>
                                 <li>High interest rates with no penalties</li>
-                               
-                                
                             </ul>
+                                                        <!--Tier stats/information --->
+                            <div class="row">
+                                
+                                 <!--NO. OF ACCOUNTS --->
+                                <div class = "col-3">
+                                    <div class="tier-stat-cont text-center">
+                                                <?php 
+                                                
+                                                //What rank to look for
+                                                $stat_rank = " AND s_rank.rank_id = 2";
+                                                
+                                                //Join the strings together
+                                                $stat_sql = $master_stat_sql . $stat_rank;
+
+                    
+                                                // Run Query
+                                                $stat_result = mysqli_query($conn, $stat_sql);
+                                        
+                                     
+                                                
+                                                ?>
+                                        <i class="fas fa-piggy-bank"></i>
+                                        <br>
+                                        <span>
+                                            <strong>
+                                                  <?php
+                                                echo mysqli_num_rows($stat_result);
+                                            
+                                            ?>
+                                           </strong>
+                                            <br>
+                                            <small>
+                                                No. of Savers
+                                            </small>
+                                        </span>
+                                    
+                                    </div>
+                                
+                                </div>
+                                <!--END OF NO. OF ACCOUNTS --->
+                                
+                                
+                                 <!--AVERAGE INTEREST --->
+                                <div class = "col-3">
+                                    <div class="tier-stat-cont text-center">
+                                        <i class="fas fa-chart-line"></i>
+                                        <br>
+                                        <span>
+                                          <?php
+                                            //CALCULATE THE AVERAGE INTEREST
+                                            $s_average = 0;
+                                            while($row = mysqli_fetch_assoc($stat_result)) { 
+                       
+                                                $s_average = $s_average + ($row["v_rate"] + $row["b_rate"]);
+                                                
+                                            }
+                                          
+                                             echo number_format($s_average / mysqli_num_rows($stat_result),"2") . "%"
+                                            
+                                               //END OF CALCULATE THE AVERAGE INTEREST
+                                            ?>
+                                            
+                                            <br>
+                                            <small>
+                                                Avg. Interest
+                                            </small>
+                                        </span>
+                                    
+                                    </div>
+                                
+                                </div>
+                                <!--END OF AVERAGE INTEREST --->                           
+                            </div>
+                             <!--END OF Tier stats/information --->
                         </div>
                         <div id="tview-b" class="tierView inactive">
                             <h2>B TIER</h2>
                             <p>These fee free saving accounts feature generous interest rates where the bonus can be achieved easily. These accounts will have poor variable rates if bonuses are not met. </p>
+                            
+                            
+                                                        <!--Tier stats/information --->
+                            <div class="row">
+                                
+                                 <!--NO. OF ACCOUNTS --->
+                                <div class = "col-3">
+                                    <div class="tier-stat-cont text-center">
+                                                <?php 
+                                                
+                                                //What rank to look for
+                                                $stat_rank = " AND s_rank.rank_id = 3";
+                                                
+                                                //Join the strings together
+                                                $stat_sql = $master_stat_sql . $stat_rank;
+
+                    
+                                                // Run Query
+                                                $stat_result = mysqli_query($conn, $stat_sql);
+                                        
+                                     
+                                                
+                                                ?>
+                                        <i class="fas fa-piggy-bank"></i>
+                                        <br>
+                                        <span>
+                                            <strong>
+                                                  <?php
+                                                echo mysqli_num_rows($stat_result);
+                                            
+                                            ?>
+                                           </strong>
+                                            <br>
+                                            <small>
+                                                No. of Savers
+                                            </small>
+                                        </span>
+                                    
+                                    </div>
+                                
+                                </div>
+                                <!--END OF NO. OF ACCOUNTS --->
+                                
+                                
+                                 <!--AVERAGE INTEREST --->
+                                <div class = "col-3">
+                                    <div class="tier-stat-cont text-center">
+                                        <i class="fas fa-chart-line"></i>
+                                        <br>
+                                        <span>
+                                          <?php
+                                            //CALCULATE THE AVERAGE INTEREST
+                                            $s_average   = 0;
+                                            while($row = mysqli_fetch_assoc($stat_result)) { 
+                       
+                                                $s_average = $s_average + ($row["v_rate"] + $row["b_rate"]);
+                                                
+                                            }
+                                          
+                                             echo number_format($s_average / mysqli_num_rows($stat_result),"2") . "%"
+                                            
+                                               //END OF CALCULATE THE AVERAGE INTEREST
+                                            ?>
+                                            
+                                            <br>
+                                            <small>
+                                                Avg. Interest
+                                            </small>
+                                        </span>
+                                    
+                                    </div>
+                                
+                                </div>
+                                <!--END OF AVERAGE INTEREST --->                           
+                            </div>
+                             <!--END OF Tier stats/information --->
                             
                         </div>
                         <div id="tview-c" class="tierView inactive">
@@ -744,6 +912,87 @@
                                 <li>Bonus only involves introductory rate</li>
                                 <li>Poor interest rate</li>   
                             </ul>
+                            
+                                                                   <!--Tier stats/information --->
+                            <div class="row">
+                                
+                                 <!--NO. OF ACCOUNTS --->
+                                <div class = "col-3">
+                                    <div class="tier-stat-cont text-center">
+                                                <?php 
+                                                
+                                                //What rank to look for
+                                                $stat_rank = " AND s_rank.rank_id > 3";
+                                                
+                                                //Join the strings together
+                                                $stat_sql = $master_stat_sql . $stat_rank;
+
+                    
+                                                // Run Query
+                                                $stat_result = mysqli_query($conn, $stat_sql);
+                                        
+                                     
+                                                
+                                                ?>
+                                        <i class="fas fa-piggy-bank"></i>
+                                        <br>
+                                        <span>
+                                            <strong>
+                                                  <?php
+                                                echo mysqli_num_rows($stat_result);
+                                            
+                                            ?>
+                                           </strong>
+                                            <br>
+                                            <small>
+                                                No. of Savers
+                                            </small>
+                                        </span>
+                                    
+                                    </div>
+                                
+                                </div>
+                                <!--END OF NO. OF ACCOUNTS --->
+                                
+                                
+                                 <!--AVERAGE INTEREST --->
+                                <div class = "col-3">
+                                    <div class="tier-stat-cont text-center">
+                                        <i class="fas fa-chart-line"></i>
+                                        <br>
+                                        <span>
+                                          <?php
+                                            //CALCULATE THE AVERAGE INTEREST
+                                            $s_average   = 0;
+                                            while($row = mysqli_fetch_assoc($stat_result)) { 
+                       
+                                                $s_average = $s_average + ($row["v_rate"] + $row["b_rate"]);
+                                                
+                                            }
+                                          
+                                            echo number_format($s_average / mysqli_num_rows($stat_result),"2") . "%"
+                                            
+                                            
+                                            
+                                            //number_format($s_average / mysqli_num_rows($stat_result),"0") . "%"
+                                            
+                                               //END OF CALCULATE THE AVERAGE INTEREST
+                                            ?>
+                                            
+                                            <br>
+                                            <small>
+                                                Avg. Interest
+                                            </small>
+                                        </span>
+                                    
+                                    </div>
+                                
+                                </div>
+                                <!--END OF AVERAGE INTEREST --->                           
+                            </div>
+                             <!--END OF Tier stats/information --->
+                            
+                            
                         </div>
                     </div>
                 </div>

@@ -100,7 +100,15 @@
         
         mail($mailTo, $subject, $txt,$headers);
         
-       header("Location: contact.php?contact=sent"); 
+        
+        //INSERT SQL INTO DATABASE
+        $contactSQL = "INSERT INTO contact_queries(contact_ip,contact_name,contact_email,contact_subject,contact_msg,contact_date) VALUES ('". $_SERVER['REMOTE_ADDR'] ."','$c_name','$c_email','$c_subject','$c_message','" . date("Y-m-d H:i:sa") . "')";
+        mysqli_query($conn,$contactSQL);
+        
+        
+        
+        
+        header("Location: contact.php?contact=sent"); 
 
         }//END of FORM CONDITIONS
         
