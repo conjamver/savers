@@ -102,21 +102,34 @@
         
         
         //INSERT SQL INTO DATABASE
-        $contactSQL = "INSERT INTO contact_queries(contact_ip,contact_name,contact_email,contact_subject,contact_msg,contact_date) VALUES ('". $_SERVER['REMOTE_ADDR'] ."','$c_name','$c_email','$c_subject','$c_message','" . date("Y-m-d H:i:sa") . "')";
+        //$contactSQL = "INSERT INTO contact_queries(contact_ip,contact_name,contact_email,contact_subject,contact_msg,contact_date) VALUES ('". $_SERVER['REMOTE_ADDR'] ."','$c_name','$c_email','$c_subject','$c_message','" . date("Y-m-d H:i:sa") . "')";
+        
+        $contactSQL = "INSERT INTO contact_queries(contact_ip,contact_name,contact_email,contact_subject,contact_msg,contact_date) VALUES (?,?,?,?,?,?)";
+        
+        //CREATE PREPARED STATEMENT
+        $stmt = mysqli_stmt_init($conn);
+        
+        //PREPARE THE PREPARED STATEMENT - first we check if function succeeds.
+        if(!mysqli_stmt_prepare($stmt, $contactSQL)){
+            echo "SQL statement has failed.";
+        }else{
+            //run some code here
+            //BIND THE PARAMETERS TO THE PLACEHOLDERS
+            mysqli_stmt_bind_param($stmt, "ssssss",$_SERVER['REMOTE_ADDR'],$c_name,$c_email,$c_subject,$c_message,date("Y-m-d H:i:sa"));
+            mysqli_stmt_execute($stmt);
+        }
+        
+        
+        //mysqli_stmt_prepare();
+        
+        
+        
         mysqli_query($conn,$contactSQL);
-        
-        
-        
-        
+
         header("Location: contact.php?contact=sent"); 
 
         }//END of FORM CONDITIONS
         
-    
-        //Run email function if validation meets
-    
-    
-         
         
         //Run SQL and store the queries...
         // -> prepare statements.

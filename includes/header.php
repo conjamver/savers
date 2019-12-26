@@ -1,4 +1,11 @@
-   <meta charset="utf-8">
+<!--Meta details for SEO -->
+    <meta charset="utf-8">
+    <meta name="description" content="Dosh Alley. Find the best interest rates within seconds by comparing Australia's savings accounts using our free online service. Develop better money habits by reading our user friendly blogs.">
+    <meta name="keywords" content="finance, australia, interest rates, money, savings">
+    <meta name="author" content="Dosh Alley">
+
+
+
    <meta name="viewport" content="width=device-width, initial-scale=1">
 
    <!-- Latest compiled and minified CSS -->

@@ -91,7 +91,14 @@
 
           //  $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, s_rank.rank, s_rank.rank_color FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1" . $excludeTxt . "ORDER BY " . $orderByVal;
 
+         //  $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, savers.s_hmoon, savers.max_bal, s_rank.rank, s_rank.rank_color, s_rank.rank_id, (savers.v_rate + savers.b_rate) AS s_intTotal FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1 ". $excludeTxt . "ORDER BY " . $orderByVal;
+    
+    
             $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, savers.s_hmoon, savers.max_bal, s_rank.rank, s_rank.rank_color, s_rank.rank_id, (savers.v_rate + savers.b_rate) AS s_intTotal FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1 ". $excludeTxt . "ORDER BY " . $orderByVal;
+    
+    
+    
+            
     
     
                           
