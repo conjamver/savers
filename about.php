@@ -4,7 +4,7 @@
 
 <head>
 
-
+    <title>Dosh Alley | About</title>
     <?php include 'includes/header.php'; ?>
     <?php include 'includes/funcs.php'; ?>
 
@@ -127,5 +127,6 @@
     <?php include 'includes/footer.php'; ?>
 
 </body>
+    <script type="application/javascript" src="js/activePage.js"></script>
 <script type="application/javascript" src="js/scrollBut.js"></script>
 </html>

@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    
+    <title>Dosh Alley | Savings comparison and Financial articles</title>
   
     <?php include 'includes/header.php'; ?>
     <?php include 'includes/funcs.php'; ?>
@@ -225,7 +225,16 @@
                     </div>
                     <div class="col-md-8">
                         <!--|||Start Search Bar||| -->
-                        <h1 class="text-center">Welcome to Dosh Alley</h1>
+                        <div id="welcomeTxt">
+                            <h1 class="">
+                                    
+                                Welcome to Dosh Alley
+                            </h1>
+                            <div>
+                           
+                            </div>
+                            
+                        </div>
                         <h3>Enter savings amount:</h3>
                         
                         <form method="GET" class="" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?'. http_build_query($_GET);?>">
@@ -376,29 +385,31 @@
                                     <!--START Saver and Bank header -->
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <h3>
-                                                <i class="fas fa-university"></i>
-                                                <?php 
+                                            <div class="saver-pad">
+                                                <h3>
+                                                    <i class="fas fa-university"></i>
+                                                    <?php 
 
-                                            //Now abbreviation instead if exists
-                                            if($row['bank_abbr'] == NULL){
-                                                echo $row["bank_name"]; 
-                                            }else{
-                                                echo $row["bank_abbr"]; 
-                                            }
+                                                //Now abbreviation instead if exists
+                                                if($row['bank_abbr'] == NULL){
+                                                    echo $row["bank_name"]; 
+                                                }else{
+                                                    echo $row["bank_abbr"]; 
+                                                }
 
 
-                                            //End of Bank header
-                                            ?>
+                                                //End of Bank header
+                                                ?>
 
-                                            </h3>
+                                                </h3>
 
-                                            <h5>
-                                                <?php 
-                                                //Savings Name
-                                                echo "- " . $row["saver_name"]; 
-                                            ?>
-                                            </h5>
+                                                <h5>
+                                                    <?php 
+                                                    //Savings Name
+                                                    echo "- " . $row["saver_name"]; 
+                                                ?>
+                                                </h5>
+                                            </div>
                                         </div>
                                     </div>
                                     <!--ENDSaver and Bank header -->
@@ -406,9 +417,11 @@
                                     <div class="row">
                                
                                         <div class="col-md-8">
+                                            <div class="saver-pad">
                                             <i class="far fa-calendar-alt"></i>
                                             <strong>Last Edited:</strong>
                                             <?php echo date("d/m/Y",strtotime($row['saver_date'])); ?>
+                                            </div>
                                         </div>
                                     </div>
                                     <hr>
@@ -552,6 +565,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <hr class="hr-noPad">
+                                            <div class="saver-pad">
                                             <strong><i class="far fa-star"></i> Bonus Condition
                                                 <br>
                                                 <small>
@@ -559,19 +573,21 @@
                                                     <?php echo $row["req"]; ?>
                                                 </small>
                                             </strong>
+                                            </div>
                                         </div>
                                     </div>    
                                     <!--END of of savings desc -->
-                                    <hr class="hr-noPad">
+                                    <br>
                                     
                                     <!--Start of additional notes -->
-                                    <div class="row">
+                                    <div class="row saverNotes">
                                         <div class="col-md-12">
-                                    <strong style="font-size:14px;">
-                                        Additional Notes
-                                        <br>
-                                        <small>   
-                                        <?php 
+                                            <div class="saver-pad">
+                                            <strong style="font-size:14px;">
+                                                Additional Notes
+                                                <br>
+                                                <small>
+                                                    <?php 
                                         if($row['s_hmoon'] == true){
                                             echo "^ Bonus interest has a honeymoon period.";
                                         }else{
@@ -579,19 +595,32 @@
                                         }
 
                                         ?>
-                                        </small> 
+                                                </small>
                                             </strong>
+                                            </div>
                                         </div>
                                     </div>
                                     
+                                   
+                                         <div class="testI">
+                                             <hr>
+                                             <div class="saver-pad">
+
+
+
+                                                    <!--Start of footer -->
+                                                    <a class="saverLinks" href="<?php echo $row["bank_url"]; ?>" target="_blank"><i class="fas fa-external-link-alt"></i> Visit website</a>
+                                                  
+                                                </div>
+                                                <!--End of footer-->
+                                        </div>
+                                    
+
+                                    
+                                    
                                     <!--End of savings Points -->
-                                    <hr class="">
-                                    <!--Start of footer -->
-                                    <a class="saverLinks" href="<?php echo $row["bank_url"]; ?>" target="_blank"><i class="fas fa-external-link-alt"></i> Visit website</a>
-                                    
-                                    <!--End of footer-->
-                                    
-                                </div>
+                          
+                                    </div>
                             </section>
                         </div>
                         <!--END Each Saver item -->
@@ -1031,6 +1060,7 @@
   <?php include 'includes/footer.php'; ?>   
 
 </body>
+    <script type="application/javascript" src="js/activePage.js"></script>
 <script type="application/javascript" src="js/closeAlert.js"></script>
 <script type="application/javascript" src="js/amtValidate.js"></script>
 <script type="application/javascript" src="js/s_calcView.js"></script>

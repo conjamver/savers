@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-md bg-dark navbar-dark shadow fixed-top">
   <!-- Brand -->
-  <a id="nav-logo" class="navbar-brand" href="index.php"> <img class="img-fluid" src="img/logo.png">Dosh Alley
+  <a id="nav-logo" class="navbar-brand" href="index.php"> 
+      <img class="img-fluid" src="img/da_500.png">
+      Dosh Alley
     </a>
 
   <!-- Toggler/collapsibe Button -->

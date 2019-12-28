@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2">
-                <img class="img-fluid" src="img/logo.png">
+               
+                 <img class="img-fluid" src="img/da_500.png">
                 <h5>Dosh Alley</h5>
            
                 <ul id="policy-links" class="list-inline">

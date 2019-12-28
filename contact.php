@@ -1,10 +1,11 @@
 <?php include 'includes/connection.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
+    
 
 <head>
 
-
+    <title>Dosh Alley | Contact Us</title>
     <?php include 'includes/header.php'; ?>
     <?php include 'includes/funcs.php'; ?>
     
@@ -298,6 +299,7 @@
 
 </body>
 <script type="application/javascript" src="js/scrollBut.js"></script>
+<script type="application/javascript" src="js/activePage.js"></script>
 <script type="application/javascript" src="js/closeAlert.js"></script>
     <script type="application/javascript" src="js/textCount.js"></script>
 </html>

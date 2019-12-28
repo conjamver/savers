@@ -94,6 +94,9 @@ body {
   .home-body h2 {
     color: #badc58; }
 
+#welcomeTxt {
+  padding: 8px 0; }
+
 #home-benefits {
   background-color: #fefefe; }
   #home-benefits i {
@@ -109,6 +112,20 @@ body {
 
 .saverLinks {
   font-size: 12px; }
+
+.saver-pad {
+  padding: 0px 8px; }
+
+.saver-footer {
+  height: 100%; }
+
+.saverNotes {
+  margin-bottom: 48px; }
+
+.testI {
+  position: absolute;
+  bottom: 0;
+  width: 100%; }
 
 #scrollBut {
   display: none;
@@ -164,11 +181,13 @@ body {
   font-size: 12px; }
 
 .hr-noPad {
-  margin-bottom: 0px; }
+  margin-bottom: 0px;
+  width: 100%; }
 
 .blog-featured {
   background-color: #fefefe;
   box-shadow: 8px 8px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
   min-height: 100%;
   transition: 0.25;
   border-radius: 8px;
@@ -289,7 +308,7 @@ body {
 nav a {
   font-weight: bold; }
 nav img {
-  max-height: 25px; }
+  max-height: 32px; }
 
 #nav-logo {
   font-family: "Lato", sans-serif;
