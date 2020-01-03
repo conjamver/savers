@@ -597,6 +597,36 @@ body{
 }
 
 
+#art-banner{
+    
+    //WELCOME PAGE STYLING
+
+    background-size:100% 100vh;
+    min-height: 30vh;
+    background-image:  linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 59%, rgba(0, 0, 0, 0.7) 100%), url(../img/au_money_1.jpg);
+    background-size:cover;
+    background-repeat:no-repeat;
+     background-attachment: fixed;
+    color: $l_white;
+    
+    display:flex;
+    align-items: center;
+    
+    
+    h1{
+        font-family: $h-font;
+        color:$primary;
+        //bottom:100px;
+    }
+    
+    img{
+        max-height: 200px;
+    }
+    
+
+}
+
+
 nav{
     a{
         font-weight: bold;
