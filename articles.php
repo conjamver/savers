@@ -29,7 +29,7 @@
                             <?php
                   //  $sql = "SELECT * FROM blogs";
                             
-                    $sql = "SELECT blogs.blog_id, blogs.user_id, blogs.blog_cdate, blogs.blog_head, blogs.blog_img, blogs.blog_ctg, blogs.blog_vis, blogs.blog_feat, users.firstname, users.lastname, users.user_id FROM blogs INNER JOIN users ON blogs.user_id = users.user_id";      
+                    $sql = "SELECT blogs.blog_id, blogs.user_id, blogs.blog_cdate, blogs.blog_head, blogs.blog_img, blogs.blog_ctg, blogs.blog_vis,blogs.blog_slug, blogs.blog_feat, users.firstname, users.lastname, users.user_id FROM blogs INNER JOIN users ON blogs.user_id = users.user_id WHERE blogs.blog_vis = 1";      
                             
                             
                     $result = mysqli_query($conn, $sql);
@@ -45,16 +45,16 @@
                             <div class="row blog-item">
                                 <!--Image section-->
                                 <div class="col-md-4">
-                                    <img class="img-fluid" src="<?php echo $row["blog_img"]; ?>">
+                                    <img class="img-fluid img-thumbnail" src="<?php echo $row["blog_img"]; ?>">
                                 </div>
                                 <!--Blog details -->
                                 <div class="col-md-8">
 
-                                    <h3><a href="post.php?id=<?php echo $postID; ?>"><?php echo $row["blog_head"]; ?></a></h3>
+                                    <h3><a href="post.php?id=<?php echo $postID; ?>&title=<?php echo $row['blog_slug']; ?>"><?php echo $row["blog_head"]; ?></a></h3>
                                     <!--Blog authour -->
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <h6><?php echo $row["firstname"] . " " . $row["lastname"]; ?>
+                                            <h6><?php echo "By " . $row["firstname"] . " " . $row["lastname"]; ?>
                                                 <small><br><?php echo $datePosted;  ?></small>
                                             </h6>
                                         </div>
@@ -86,7 +86,10 @@
                         <!--Printing the title -->
                     </div>
                     <div class="col-md-3">
-                  
+                        <?php 
+                            include 'includes/sidebar.php'; 
+                            mysqli_close($conn);
+                        ?>
                     </div>
                 </div>
             </div>

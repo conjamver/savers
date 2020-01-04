@@ -1,24 +1,45 @@
 <div id="sidebar-body">
-    <h4>Recent Posts</h4>
+    <h4>Featured Posts</h4>
     <?php 
-    $sqlRecent = "SELECT * FROM blogs";
+    $sqlRecent = "SELECT * FROM blogs WHERE blog_feat = 1 AND blog_vis = 1";
     $resultRecent = mysqli_query($conn, $sqlRecent);
     
     if (mysqli_num_rows($resultRecent) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($resultRecent)) { ?>
-        <a href="#"><?php echo $row['blog_heading']; ?></a>
+        <a href="post.php?id=<?php echo $postID; ?>&title=<?php echo $row['blog_slug']; ?>"><i class="far fa-edit"></i> <?php echo $row['blog_head']; ?></a>
         <br>
     <br>
     
+    
+    
     <?php }
 } else {
-    echo "Error loading recent posts";
+    echo "Error loading featured posts";
 }
     
     ?>
     <hr>
     <h4>Categories</h4>
+    <?php
+        $sqlCtg = "SELECT DISTINCT * FROM blogs WHERE blog_vis = 1";
+        $resultCtg = mysqli_query($conn, $sqlCtg);
+    
+        if (mysqli_num_rows($resultCtg) > 0) {
+            
+            while($row = mysqli_fetch_assoc($resultCtg)) { ?>
+                <a href="#"><i class="fas fa-layer-group"></i> <?php echo $row['blog_ctg']; ?></a>
+                <br>
+    
+        <?php 
+            }
+            
+            
+        }else{
+            echo "Error loading category";
+        }
+    
+    ?>
     <hr>
     
 </div>
