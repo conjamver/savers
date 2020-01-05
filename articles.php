@@ -29,7 +29,7 @@
                             <?php
                   //  $sql = "SELECT * FROM blogs";
                             
-                    $sql = "SELECT blogs.blog_id, blogs.user_id, blogs.blog_cdate, blogs.blog_head, blogs.blog_img, blogs.blog_ctg, blogs.blog_vis,blogs.blog_slug, blogs.blog_feat, users.firstname, users.lastname, users.user_id FROM blogs INNER JOIN users ON blogs.user_id = users.user_id WHERE blogs.blog_vis = 1";      
+                    $sql = "SELECT blogs.blog_id, blogs.user_id, blogs.blog_cdate, blogs.blog_head, blogs.blog_img, blogs.blog_ctg, blogs.blog_content, blogs.blog_vis,blogs.blog_slug, blogs.blog_feat, users.firstname, users.lastname, users.user_id FROM blogs INNER JOIN users ON blogs.user_id = users.user_id WHERE blogs.blog_vis = 1";      
                             
                             
                     $result = mysqli_query($conn, $sql);
@@ -54,9 +54,18 @@
                                     <!--Blog authour -->
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <h6><?php echo "By " . $row["firstname"] . " " . $row["lastname"]; ?>
-                                                <small><br><?php echo $datePosted;  ?></small>
+                                            <h6><?php echo "By " . $row["firstname"] . " " . $row["lastname"] . " | " . $datePosted;  ?>
                                             </h6>
+                                            <?php 
+                                                //Show only partial but never cut off a word
+                                                if(strlen($row["blog_content"])>120){  
+                                                    echo substr($row["blog_content"],0,120 + strpos($row["blog_content"]," ",120) - 120) . "...";
+                                                }
+                                                else{
+                                                    echo "...";
+                                                }
+                                            
+                                            ?>
                                         </div>
                                     </div>
                                     <!--Blog read more-->

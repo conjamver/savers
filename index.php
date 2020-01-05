@@ -694,7 +694,8 @@
                     <div class="col-md-6 text-left">
                         <div id="tview-s" class="tierView">
                             <h2>S TIER</h2>
-                            <p>S Tier will ensure maximum savings with great interest rates that are easy to achieve. This rank also has unique features to aid saving such as custom round ups, fee free ATMs and user friendly saving reports.
+                            <?php include 'includes/tier_desc.php'; ?> 
+
                             
                          
                             
@@ -778,10 +779,8 @@
                         </div>
                         <div id="tview-a" class="tierView inactive">
                             <h2>A TIER</h2>
-                            <p>Fee free accounts that have balanced rates</p>
-                            <ul>
-                                <li>High interest rates with no penalties</li>
-                            </ul>
+                            <?php include 'includes/tier_desc.php'; ?> 
+
                                                         <!--Tier stats/information --->
                             <div class="row">
                                 
@@ -859,7 +858,7 @@
                         </div>
                         <div id="tview-b" class="tierView inactive">
                             <h2>B TIER</h2>
-                            <p>These fee free saving accounts feature generous interest rates where the bonus can be achieved easily. These accounts will have poor variable rates if bonuses are not met. </p>
+                            <?php include 'includes/tier_desc.php'; ?>  
                             
                             
                                                         <!--Tier stats/information --->
@@ -940,14 +939,7 @@
                         </div>
                         <div id="tview-c" class="tierView inactive">
                             <h2>C TIER and below</h2>
-                            <p>For long term saving, it is advised to seek better options. Any saving accounts with monthly fees, rough penalties and a poor variables rate are characteristics to avoid.</p>
-                            
-                            <p>Below are the characteristics for lower tier accounts</p>
-                            <ul>
-                                <li>Any monthly admin fees for accounts</li>
-                                <li>Bonus only involves introductory rate</li>
-                                <li>Poor interest rate</li>   
-                            </ul>
+                            <?php include 'includes/tier_desc.php'; ?> 
                             
                                                                    <!--Tier stats/information --->
                             <div class="row">

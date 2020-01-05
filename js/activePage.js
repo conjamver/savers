@@ -21,6 +21,12 @@ $( document ).ready(function() {
         resetActive();
         navLinks[0].classList.add("active");       
     }
+    else if(titlePage.match(/Articles.*/))
+    {
+        resetActive();
+        navLinks[2].classList.add("active");       
+    }
+    
     else
     {
         resetActive();   
