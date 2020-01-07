@@ -24,12 +24,12 @@
                 <div class="row">
                     <div class="col-md-9">
                         <section id="blog-body">
-                            <h1>Articles</h1>
+                            <h1>All Articles</h1>
                             <hr>
                             <?php
                   //  $sql = "SELECT * FROM blogs";
                             
-                    $sql = "SELECT blogs.blog_id, blogs.user_id, blogs.blog_cdate, blogs.blog_head, blogs.blog_img, blogs.blog_ctg, blogs.blog_content, blogs.blog_vis,blogs.blog_slug, blogs.blog_feat, users.firstname, users.lastname, users.user_id FROM blogs INNER JOIN users ON blogs.user_id = users.user_id WHERE blogs.blog_vis = 1";      
+                    $sql = "SELECT blogs.blog_id, blogs.user_id, blogs.blog_cdate, blogs.blog_head, blogs.blog_img, blogs.blog_ctg, blogs.blog_content, blogs.blog_vis,blogs.blog_slug, blogs.blog_feat, users.firstname, users.lastname, users.user_id FROM blogs INNER JOIN users ON blogs.user_id = users.user_id WHERE blogs.blog_vis = 1 ORDER BY blog_cdate DESC";      
                             
                             
                     $result = mysqli_query($conn, $sql);

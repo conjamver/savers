@@ -63,7 +63,7 @@
                                 </div>
                                 
                                  <div class="col-md-4">
-                                     <h5><?php echo "Category: " . $row["blog_ctg"];  ?></h5>
+                                     <h5><?php echo "Category: <i>" . $row["blog_ctg"] . "</i>";  ?></h5>
                                 </div>
                             </div>
                             <hr>
