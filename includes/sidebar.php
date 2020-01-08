@@ -7,7 +7,7 @@
     if (mysqli_num_rows($resultRecent) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($resultRecent)) { ?>
-        <a href="post.php?id=<?php echo $postID; ?>&title=<?php echo $row['blog_slug']; ?>"><i class="far fa-edit"></i> <?php echo $row['blog_head']; ?></a>
+        <a href="/post/<?php echo $row['blog_id'] . "/" . $row["blog_slug"]; ?>"><i class="far fa-edit"></i> <?php echo $row['blog_head']; ?></a>
         <br>
     <br>
     

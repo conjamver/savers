@@ -390,4 +390,37 @@ footer {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   color: #6ab04c; }
 
+@media only screen and (max-width: 768px) {
+  p {
+    font-size: 16px; }
+
+  ul {
+    font-size: 16px; }
+
+  #alertContainer {
+    font-size: 14px; }
+
+  #home-banner h3 {
+    font-size: 18px; }
+  #home-banner select {
+    display: block;
+    background-color: red; }
+  #home-banner #filterAmount {
+    display: block;
+    width: 100%; }
+  #home-banner .form-check-inline {
+    margin: 0;
+    margin-right: 8px; }
+
+  .pagination {
+    padding: 4px 0px; }
+
+  .tierSelector h2 {
+    font-size: 24px; }
+
+  .tier-stat-cont {
+    font-size: 12px; }
+    .tier-stat-cont i {
+      font-size: 24px; } }
+
 /*# sourceMappingURL=main.css.map */

@@ -759,3 +759,77 @@ footer{
 }
 
 
+
+
+/////////////MEDIA QUERIES///////////
+
+@media only screen and (max-width:768px){
+    p{
+       font-size:16px;
+    }
+    ul{
+        font-size:16px;
+    }
+    
+    #alertContainer{
+        font-size:14px;
+    }
+    
+    //Banner styling for mobile
+    #home-banner{
+        h3{
+            font-size:18px;
+        }
+        select{
+            display:block;
+            background-color:red;
+            
+        }
+        
+        #filterAmount{
+            display:block;
+            width:100%;
+        }
+        
+        .form-check-inline{
+            margin:0;
+            margin-right:8px;
+        }
+        
+        
+        
+    }
+    
+    //Pagination Queries
+    .pagination{
+        
+        padding:4px 0px;
+    }
+    
+    
+    //Tier selector queries
+    .tierSelector{
+        h2{
+            font-size:24px;
+        }
+    }
+    
+    .tier-stat-cont{
+        font-size:12px;
+        i{
+            font-size:24px;
+        }
+    }
+    ///END OF TIER SELECTOR MEDIA
+    
+    //CONTACT US MEDIA QUERIES
+    
+    
+}
+
+
+
+
+
+
+

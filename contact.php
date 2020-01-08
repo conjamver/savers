@@ -95,7 +95,8 @@
         
         
         //GENERATE THE EMAIL
-        $mailTo = "connor.j.vernon97@gmail.com";
+        $mailTo = "mail@doshalley.com";
+        $subject = $c_subject;
         $headers = "From: " . $c_email;
         $txt = "You have recieved a email from: " .$c_name."\n\n".$c_message;
         

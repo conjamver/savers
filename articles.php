@@ -50,7 +50,11 @@
                                 <!--Blog details -->
                                 <div class="col-md-8">
 
-                                    <h3><a href="post.php?id=<?php echo $postID; ?>&title=<?php echo $row['blog_slug']; ?>"><?php echo $row["blog_head"]; ?></a></h3>
+                                    <h3>
+                                        <a href="/post/<?php echo $postID . "/" . $row["blog_slug"]; ?>">
+                                        
+                                        
+                                        <?php echo $row["blog_head"]; ?></a></h3>
                                     <!--Blog authour -->
                                     <div class="row">
                                         <div class="col-md-12">
@@ -71,7 +75,7 @@
                                     <!--Blog read more-->
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <a href="post.php?id=<?php echo $postID; ?>"><button class="btn btn-outline-primary">Read More</button></a>
+                                            <a href="/post/<?php echo $postID . "/" . $row["blog_slug"]; ?>"><button class="btn btn-outline-primary">Read More</button></a>
                                         </div>
                                         <!--Blog category-->
                                         <div class="col-md-6 text-right">
@@ -105,6 +109,9 @@
         </section>
 
     </div>
+    
+      <?php include 'includes/footer.php'; ?>   
+
 </body>
 <script type="application/javascript" src="js/activePage.js"></script>
 <script type="application/javascript" src="js/scrollBut.js"></script>

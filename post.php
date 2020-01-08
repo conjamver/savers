@@ -45,7 +45,7 @@
                             <!--BLOG IMAGE-->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <img class="img-fluid" src="<?php echo $row["blog_img"]; ?>">
+                                    <img class="img-fluid" src="/<?php echo $row["blog_img"]; ?>">
                                 </div>
                             </div>
                              <!--BLOG Header-->
@@ -95,6 +95,10 @@
         </section>
 
     </div>
+    
+      <?php include 'includes/footer.php'; ?>   
+
+    
 </body>
 <script type="application/javascript" src="js/activePage.js"></script>
 <script type="application/javascript" src="js/scrollBut.js"></script>

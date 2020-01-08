@@ -1,0 +1,29 @@
+
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php73” package as the default “PHP” programming language.
+<IfModule mime_module>
+ AddHandler application/x-httpd-ea-php73 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
+
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+#Re writing the main links
+Rewriterule ^about about.php [NC,L]
+Rewriterule ^contact contact.php [NC,L]
+Rewriterule ^articles articles.php [NC,L]
+Rewriterule ^policy policy.php [NC,L]
+Rewriterule ^terms terms.php [NC,L]
+
+
+#Only run code if post is contained in url. Contain numbers 1 to 9 and anything after
+#L only applies to the rule below
+#NC is non Case
+#RewriteRule ^post/([0-9]+)/([0-9a-zA-Z_-]+) post.php?id=$1&title=$2 [NC,L]
+
+RewriteRule ^post/([0-9]+) post.php?id=$1 [NC,L]

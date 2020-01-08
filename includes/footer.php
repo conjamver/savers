@@ -3,12 +3,12 @@
         <div class="row">
             <div class="col-md-2">
                
-                 <img class="img-fluid" src="img/da_500.png">
+                 <img class="img-fluid" src="/img/da_500.png">
                 <h5>Dosh Alley</h5>
            
                 <ul id="policy-links" class="list-inline">
-                    <li class="list-inline-item"> <a href="terms.php">Terms and Conditions</a></li>
-                    <li class="list-inline-item"><a href="policy.php">Privacy Policy</a></li>
+                    <li class="list-inline-item"> <a href="/terms">Terms and Conditions</a></li>
+                    <li class="list-inline-item"><a href="/policy">Privacy Policy</a></li>
                 </ul>
                 
 

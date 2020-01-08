@@ -166,11 +166,11 @@
             <div id="alertContainer" class="alert alertErr">
                 <div class="container">
                     <div class="row">
-                        <div class="col-11 text-left">
+                        <div class="col-10 text-left">
                               <strong><i class="fas fa-exclamation-circle"></i> Error: </strong><?php echo $alertErr; ?>
                         </div>
                         
-                        <div class="col-1 text-right">
+                        <div class="col-2 text-right">
                              <!--Exit alert button --> 
                             <span class="alertExit">
                                 <i class="far fa-times-circle"></i>
@@ -190,11 +190,11 @@
         <div id="alertContainer" class="alert alertSuccess">
                 <div class="container">
                     <div class="row">
-                        <div class="col-11 text-left">
+                        <div class="col-10 text-left">
                               <strong><i class="far fa-check-circle"></i> Success! </strong><?php echo "Interest rates for $" . number_format($_GET['saveAmount'],"0") . " have been generated below."; ?>
                         </div>
                         
-                        <div class="col-1 text-right">
+                        <div class="col-2 text-right">
                              <!--Exit alert button --> 
                             <span class="alertExit">
                                 <i class="far fa-times-circle"></i>
@@ -285,8 +285,9 @@
                                            >
                                    
                                     <label class="form-check-label " for="ex_honey">
-                                        No honeymoon
+                                        No honeymoon 
                                     </label>
+                                     <i class="far fa-question-circle honeymoonPop" data-toggle="popover" data-trigger="focus" title="Honeymoon period?" data-placement="top" data-content="Savings account with introductory bonus interest rate."></i>
                                 </div>
 
 
@@ -1058,6 +1059,13 @@
 <script type="application/javascript" src="js/s_calcView.js"></script>
 <script type="application/javascript" src="js/s_tierView.js"></script>
 <script type="application/javascript" src="js/scrollBut.js"></script>
+
+<script>
+//HONEYMOON POP OVER
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover();
+});
+</script>
 
 
     
