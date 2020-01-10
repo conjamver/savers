@@ -153,6 +153,24 @@ body{
     margin:4px 0;
 }
 
+
+
+
+.honeymoonPop{
+    margin-left:4px;
+    transition:0.25s;
+    
+}
+
+.honeymoonPop:hover{
+    cursor:pointer;
+    transition:0.25s;
+    opacity:0.5;
+}
+
+
+
+
 //Elements within the sort section
 #saveFilters{
     display: flex;
@@ -721,6 +739,15 @@ footer{
     
 }
 
+
+    
+    .ctg{
+        margin:0 4px;
+    }
+
+
+
+
 .blog-item{
    
     border-bottom: solid 1px grey;
@@ -745,8 +772,17 @@ footer{
         font-size:18px;
     }
     
+    a {
+        font-size:18px;
+    }
+    
+    ul{
+        font-size:18px;
+    }
+    
 }
 
+///SIDEBAR STYLES
 
 #sidebar-body{
     background-color:$l_white;
@@ -756,10 +792,17 @@ footer{
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     
     color:$d-primary;
+    
+    .featuredblog-item{
+    margin:8px 0;
+}
+
+    
 }
 
 
 
+/////
 
 /////////////MEDIA QUERIES///////////
 

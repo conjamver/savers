@@ -285,9 +285,9 @@
                                            >
                                    
                                     <label class="form-check-label " for="ex_honey">
-                                        No honeymoon 
+                                        No honeymoon    
                                     </label>
-                                     <i class="far fa-question-circle honeymoonPop" data-toggle="popover" data-trigger="focus" title="Honeymoon period?" data-placement="top" data-content="Savings account with introductory bonus interest rate."></i>
+                                    <span><i class="far fa-question-circle honeymoonPop" data-toggle="popover"  title="Honeymoon period?" data-placement="top" data-content="Savings account with a introductory bonus interest rate."></i></span>
                                 </div>
 
 

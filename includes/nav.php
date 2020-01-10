@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md bg-dark navbar-dark shadow fixed-top">
   <!-- Brand -->
-  <a id="nav-logo" class="navbar-brand" href="index.php"> 
+  <a id="nav-logo" class="navbar-brand" href="/"> 
       <img class="img-fluid" src="/img/da_500.png">
       Dosh Alley
     </a>
@@ -14,7 +14,7 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="/index">Home</a>
+        <a class="nav-link" href="/">Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/about">About</a>

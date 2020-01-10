@@ -1,4 +1,5 @@
 <div id="sidebar-body">
+   
     <h4>Featured Posts</h4>
     <?php 
     $sqlRecent = "SELECT * FROM blogs WHERE blog_feat = 1 AND blog_vis = 1";
@@ -6,10 +7,18 @@
     
     if (mysqli_num_rows($resultRecent) > 0) {
     // output data of each row
-    while($row = mysqli_fetch_assoc($resultRecent)) { ?>
+    while($row = mysqli_fetch_assoc($resultRecent)) { 
+      //Formating date from SQL server
+        $timePosted = strtotime($row["blog_cdate"]);
+        $datePosted = date("F d, Y ", $timePosted);
+      
+    ?>
+    
+    <div class="featuredblog-item">
         <a href="/post/<?php echo $row['blog_id'] . "/" . $row["blog_slug"]; ?>"><i class="far fa-edit"></i> <?php echo $row['blog_head']; ?></a>
-        <br>
-    <br>
+        <small class="text-secondary d-block">- <?php echo $datePosted;?></small>
+    </div>
+   
     
     
     
@@ -19,6 +28,7 @@
 }
     
     ?>
+
     <hr>
     <h4>Categories</h4>
     <?php
@@ -30,6 +40,8 @@
             
             while($row = mysqli_fetch_assoc($resultCtg)) { 
                 $ctg = $row['blog_ctg'];
+                 
+              
                 
                 //Count using SQL
                 $sqlCtgCount = "SELECT blog_ctg FROM blogs WHERE blog_ctg = '$ctg' AND blog_vis = 1";
@@ -38,7 +50,7 @@
     
                 ?>
     
-                <a href="#"><i class="fas fa-layer-group"></i> <?php echo $ctg; ?></a>
+                <a href="/articles_category/<?php echo $row["blog_ctg"]; ?>"><i class="fas fa-layer-group"></i> <?php echo $ctg; ?></a>
                 <span class="badge badge-primary"><?php echo mysqli_num_rows($resultCtgCount); ?></span>
     
                 <br>

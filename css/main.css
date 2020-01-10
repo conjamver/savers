@@ -71,6 +71,15 @@ body {
 #saveFiltersOuter {
   margin: 4px 0; }
 
+.honeymoonPop {
+  margin-left: 4px;
+  transition: 0.25s; }
+
+.honeymoonPop:hover {
+  cursor: pointer;
+  transition: 0.25s;
+  opacity: 0.5; }
+
 #saveFilters {
   display: flex;
   flex-flow: row wrap;
@@ -365,6 +374,9 @@ footer {
   #blog-body h1 {
     color: #6ab04c; }
 
+.ctg {
+  margin: 0 4px; }
+
 .blog-item {
   border-bottom: solid 1px grey;
   padding: 12px 0; }
@@ -381,6 +393,10 @@ footer {
     color: #6ab04c; }
   #post-body p {
     font-size: 18px; }
+  #post-body a {
+    font-size: 18px; }
+  #post-body ul {
+    font-size: 18px; }
 
 #sidebar-body {
   background-color: #fefefe;
@@ -389,6 +405,8 @@ footer {
   border-radius: 10px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   color: #6ab04c; }
+  #sidebar-body .featuredblog-item {
+    margin: 8px 0; }
 
 @media only screen and (max-width: 768px) {
   p {
