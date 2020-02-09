@@ -3,7 +3,8 @@
 <html lang="en">
 
 <head>
-    <title>Dosh Alley | Savings comparison and Financial articles</title>
+    <title>Dosh Alley | Australian Savings comparison and Financial guides</title>
+    <meta name="description" content="Dosh Alley. Find the best interest rates within seconds by comparing Australia's savings accounts using our free online service. Develop better money habits by reading our user friendly blogs.">
   
     <?php include 'includes/header.php'; ?>
     <?php include 'includes/funcs.php'; ?>
@@ -96,11 +97,7 @@
     
             $sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.saver_date, savers.v_rate, savers.b_rate, savers.req, savers.s_hmoon, savers.max_bal, s_rank.rank, s_rank.rank_color, s_rank.rank_id, (savers.v_rate + savers.b_rate) AS s_intTotal FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1 ". $excludeTxt . "ORDER BY " . $orderByVal;
     
-    
-    
-            
-    
-    
+
                           
             //Master SQL string for statistics
             $master_stat_sql = "SELECT banks.bank_name, banks.bank_abbr, banks.bank_url, savers.saver_id, savers.saver_name, savers.v_rate, savers.b_rate, savers.s_hmoon, savers.max_bal, s_rank.rank, s_rank.rank_color, s_rank.rank_id, (savers.v_rate + savers.b_rate) AS s_intTotal FROM (banks INNER JOIN savers ON banks.bank_id = savers.bank_id) INNER JOIN s_rank ON savers.rank_id = s_rank.rank_id WHERE savers.visible = 1";
@@ -289,7 +286,12 @@
                                     </label>
                                     <span><i class="far fa-question-circle honeymoonPop" data-toggle="popover"  title="Honeymoon period?" data-placement="top" data-content="Savings account with a introductory bonus interest rate."></i></span>
                                 </div>
-
+                                
+                                
+                                
+                                
+                                
+                           
 
 
                             </div>
@@ -433,15 +435,18 @@
                                         <div class="col-md-6 text-center">
 
                                             <strong>Variable Rate</strong>
+                                            <span><i class="far fa-question-circle honeymoonPop" data-toggle="popover"  title="Variable Rate?" data-placement="top" data-content="Default interest rate that always applies to your savings account balance. "></i></span>
+                                            
                                             <br>
-                                            <?php echo $row["v_rate"];?>%
+                                            <strong><?php echo $row["v_rate"];?>%</strong>
                                         </div>
 
                                         <div class="col-md-6 text-center">
 
                                             <strong>Bonus Rate</strong>
+                                            <span><i class="far fa-question-circle honeymoonPop" data-toggle="popover"  title="Bonus Rate?" data-placement="top" data-content=" Extra interest rate that is applied on top of the variable rate if bonus conditions are met."></i></span>
                                             <br>
-                                            <?php echo $row["b_rate"]; ?>%
+                                            <strong><?php echo $row["b_rate"]; ?>%</strong>
                                         </div>
                                     </div>
                                        
@@ -453,6 +458,7 @@
 
                                                     <strong>Monthly interest</strong>
                                                     <h4>
+                                                        <strong>
                                                         <?php 
                                                         //Only print if value is numeric and value is set.
                                                         if (isset($saveAmount) && is_numeric($saveAmount)){
@@ -468,6 +474,7 @@
                                                 
                                                         
                                                   ?>
+                                                    </strong>
                                                     </h4>
                                                     
                                                     <?php 
@@ -495,6 +502,7 @@
                                                     <div class="col-md-12 text-center inactive s_viewType s_viewTypeYr">
                                                         <strong>Yearly interest</strong>
                                                         <h4>
+                                                        <strong>
                                                             <?php 
                                                         //Only print if value is numeric and value is set.
                                                         if (isset($saveAmount) && is_numeric($saveAmount)){
@@ -520,7 +528,7 @@
                                                             
                                                         ?>
                                                         <br>
-                                                          
+                                                          </strong>
                                                         </h4>
                                                         
                                                         
@@ -1031,12 +1039,108 @@
         <!--====END Saver tier legend dashboard ====--> 
         
         
+        
+        
+
+        <!--*****START featured blogs section-->
+        
+        
+        <?php 
+                                                
+        //Query for getting featured blog data
+        $blogSQL = "SELECT blogs.blog_id, blogs.user_id, blogs.blog_cdate, blogs.blog_head, blogs.blog_img, blogs.blog_ctg, blogs.blog_content, blogs.blog_vis,blogs.blog_slug, blogs.blog_feat, users.firstname, users.lastname, users.user_id FROM blogs INNER JOIN users ON blogs.user_id = users.user_id WHERE blogs.blog_vis = 1 AND blogs.blog_feat = 1 ORDER BY blog_cdate DESC";
+                                                
+        $resultBlog = mysqli_query($conn, $blogSQL);
+        
+                                            ?>
+        
+
+        
+        
         <section id="" class="sectionBody">
-            <!--START Contact US section-->
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h1>Contact Us</h1>
+                        <h1 class="hgreen">Featured Articles</h1>
+                        <hr>
+                    </div>
+                </div>
+
+     
+                
+                <!--START left blog-->
+                <div class="row">
+                    
+                    
+                               
+                <?php
+            if (mysqli_num_rows($resultBlog) > 0) {
+                        // output data of each row
+                        while($row = mysqli_fetch_assoc($resultBlog)) { 
+                            $postID = $row["blog_id"];
+                            //Formating date from SQL server
+                            $timePosted = strtotime($row["blog_cdate"]);
+                            $datePosted = date("F d, Y ", $timePosted);
+                            ?>
+                    
+                    
+                    <div class="col-md-6">
+
+                        <div class="card ftblog shadow-sm">
+                            <img class="img-fluid img-thumbnail" src="/<?php echo $row["blog_img"]; ?>">
+                            <div class="card-body">
+                                <a href="/post/<?php echo $postID . "/" . $row["blog_slug"]; ?>">
+                                    <h4 class="card-title"><?php echo $row['blog_head']; ?></h4>
+                                </a>
+                                
+                                  <?php 
+                                                //Show only partial but never cut off a word
+                                                if(strlen($row["blog_content"])>140){  
+                                                    echo substr($row["blog_content"],0,140 + strpos($row["blog_content"]," ",140) - 140) . "...";
+                                                }
+                                                else{
+                                                    echo "...";
+                                                }
+                                            
+                                            ?>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--END left blog-->
+
+            <?php
+            
+                                    }
+        }
+        
+        ?>
+                    <!--END Right blog-->
+                </div>
+            </div>
+        </section>
+
+
+        <!--****END featured Blogs section-->
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <!--START Contact US section-->
+        <section id="" class="sectionBody ">
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h1 class="hgreen"><i class="far fa-paper-plane"></i> Contact Us</h1>
                         <hr>
                         <h3>It is incredibly important to hear feedback from you. We endeavour to provide the most accurate services.</h3>
                         <a href="contact.php"><button class="btn btn-lg btn-primary">Contact us!</button></a>
@@ -1046,7 +1150,7 @@
     
             </div>
         </section>
-        
+        <!--END Contact US section-->
         
         
 </div>

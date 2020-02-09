@@ -14,7 +14,7 @@
     <script data-ad-client="ca-pub-8598485191630300" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
     <meta charset="utf-8">
-    <meta name="description" content="Dosh Alley. Find the best interest rates within seconds by comparing Australia's savings accounts using our free online service. Develop better money habits by reading our user friendly blogs.">
+    
     <meta name="keywords" content="finance, australia, interest rates, money, savings">
     <meta name="author" content="Dosh Alley">
     

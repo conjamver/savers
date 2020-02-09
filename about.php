@@ -7,6 +7,8 @@
     <title>Dosh Alley | About</title>
     <?php include 'includes/header.php'; ?>
     <?php include 'includes/funcs.php'; ?>
+    
+    <meta name="description" content="Dosh Alley is a free website service that provides a Savings Account comparison application and additional content such as articles to help secure your financial future.">
 
 
 
@@ -40,13 +42,13 @@
                         <h2>
                             About us
                         </h2>
-                        <p>Dosh Alley is a free website that provides a Savings Account comparison application and additional content such as articles to help secure your financial future.
+                        <p>Dosh Alley is a free website service that provides a Savings Account comparison application and additional content such as articles to help secure your financial future.
                             </p>
 
 <p>It was started by a young individual name Connor, a passionate web programmer who eventually delved into the world of Australian finance. 
                         </p>
     <p>
-    The biggest influences for Dosh Alley were The Barefoot Investor, an Australian money guide that was easy to understand. Connor eventually learnt the importance of good money behaviours and thus Dosh Alley was born.</p>
+    The biggest influences for Dosh Alley were <a href="https://www.amazon.com.au/gp/product/0730324214/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=0730324214&linkCode=as2&tag=doshalley-22&linkId=0dc3650c14a6aab119c10e7d4d5394aa" target="_blank">The Barefoot Investor</a>, an Australian money guide that was easy to understand. Connor eventually learnt the importance of good money behaviours and thus Dosh Alley was born.</p>
 
 
                        
@@ -71,7 +73,7 @@
                     </div>
                     <div class ="col-md-6">
                         <h2>Our mission</h2>
-                        <p>We believe that every aussie deserves to make the most out of their finances. Our savings account comparison application is our first step for helping  Aussies maximise their returns. </p>
+                        <p>We believe that every aussie deserves to make the most out of their finances. Our savings account comparison application is our first step for helping Aussies maximise their returns. </p>
                             
                             <p>We also aim to deliver information in a way that is easily understandable to people who may know nothing about finance. We understand that money can be boring to read about online. </p>
                         

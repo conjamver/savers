@@ -507,8 +507,7 @@ body{
 
 
 
-
-
+//Checkbox custom STYLES---------------------
 
 
 
@@ -519,6 +518,12 @@ body{
     
     min-height: 100%;
     font-size:18px;
+    
+    h2{
+        color: $d-primary;
+        border-bottom: solid 1px $d-primary; 
+    }
+    
 }
 
 .about-container{
@@ -534,6 +539,11 @@ body{
     padding:24px 0;
     
 }
+
+.hgreen{
+    color:$d-primary;
+}
+
 
 .contPad{
     padding:16px 0;
@@ -800,7 +810,28 @@ footer{
     
 }
 
+/////////////////BLOG FEATURE SECTION
 
+
+
+.ftblog{
+    
+   
+    
+    h4{
+        color:$d-primary;
+    }
+    a{
+        color:$d-primary;
+    }
+    p{
+        font-size:18px;
+    }
+}
+
+ .card{
+        min-height:100%;
+    }
 
 /////
 

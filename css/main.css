@@ -266,6 +266,9 @@ body {
 #about {
   min-height: 100%;
   font-size: 18px; }
+  #about h2 {
+    color: #6ab04c;
+    border-bottom: solid 1px #6ab04c; }
 
 .about-container {
   border: 2px solid #6ab04c;
@@ -274,6 +277,9 @@ body {
 
 .sectionBody {
   padding: 24px 0; }
+
+.hgreen {
+  color: #6ab04c; }
 
 .contPad {
   padding: 16px 0; }
@@ -407,6 +413,16 @@ footer {
   color: #6ab04c; }
   #sidebar-body .featuredblog-item {
     margin: 8px 0; }
+
+.ftblog h4 {
+  color: #6ab04c; }
+.ftblog a {
+  color: #6ab04c; }
+.ftblog p {
+  font-size: 18px; }
+
+.card {
+  min-height: 100%; }
 
 @media only screen and (max-width: 768px) {
   p {
