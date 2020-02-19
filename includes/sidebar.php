@@ -32,7 +32,7 @@
     <hr>
     <h4>Categories</h4>
     <?php
-        $sqlCtg = "SELECT DISTINCT * FROM blogs WHERE blog_vis = 1";
+        $sqlCtg = "SELECT DISTINCT blog_ctg FROM blogs WHERE blog_vis = 1";
         $resultCtg = mysqli_query($conn, $sqlCtg);
         $ctg = "";
     

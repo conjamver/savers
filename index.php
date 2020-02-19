@@ -1103,6 +1103,8 @@
                                                 }
                                             
                                             ?>
+                                <br>
+                                <a href="/post/<?php echo $postID . "/" . $row["blog_slug"]; ?>"><button class="btn btn-outline-primary">Read More</button></a>
 
                             </div>
                         </div>

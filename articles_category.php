@@ -31,9 +31,11 @@
                     $ctg = cleanData($_GET['ctg']);        
                             
                     $sql = "SELECT blogs.blog_id, blogs.user_id, blogs.blog_cdate, blogs.blog_head, blogs.blog_img, blogs.blog_ctg, blogs.blog_content, blogs.blog_vis,blogs.blog_slug, blogs.blog_feat, users.firstname, users.lastname, users.user_id FROM blogs INNER JOIN users ON blogs.user_id = users.user_id WHERE blogs.blog_vis = 1 AND blogs.blog_ctg = '$ctg'" . " ORDER BY blog_cdate DESC";      
+                     
                             
+                            /////TITLE
                     ?>
-                            <h1>Articles > <?php echo $ctg;?></h1>
+                            <h1>Articles > <small><?php echo $ctg;?> </small></h1>
                             <hr>
             
                             
